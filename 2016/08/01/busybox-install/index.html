@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="busybox," />
 
 
 
@@ -84,12 +84,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="geelong's home">
-<meta property="og:url" content="https://geelong.github.io/tags/mac/index.html">
+<meta name="description" content="下载对应版本的busybox下载地址
+安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android6.0 userdebug版安装busybox">
+<meta property="og:url" content="https://geelong.github.io/2016/08/01/busybox-install/index.html">
 <meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="下载对应版本的busybox下载地址
+安装">
+<meta property="og:updated_time" content="2016-07-31T16:16:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="geelong's home">
+<meta name="twitter:title" content="Android6.0 userdebug版安装busybox">
+<meta name="twitter:description" content="下载对应版本的busybox下载地址
+安装">
 
 
 
@@ -110,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="https://geelong.github.io/tags/mac/"/>
+  <link rel="canonical" href="https://geelong.github.io/2016/08/01/busybox-install/"/>
 
-  <title> 标签: mac | geelong's home </title>
+  <title> Android6.0 userdebug版安装busybox | geelong's home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -215,46 +222,141 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        mac
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android6.0 userdebug版安装busybox
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-01T00:12:21+08:00" content="2016-08-01">
+              2016-08-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/01/busybox-install/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/busybox-install/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/01/busybox-install/" class="leancloud_visitors" data-flag-title="Android6.0 userdebug版安装busybox">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="下载对应版本的busybox"><a href="#下载对应版本的busybox" class="headerlink" title="下载对应版本的busybox"></a>下载对应版本的busybox</h1><p><a href="https://busybox.net/downloads/binaries/" target="_blank" rel="external">下载地址</a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><a id="more"></a>
+<h2 id="remount-system不上"><a href="#remount-system不上" class="headerlink" title="remount system不上"></a>remount system不上</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@shamu:/system/xbin <span class="comment"># cd /system/xbin/                                     </span></div><div class="line">root@shamu:/system/xbin <span class="comment"># mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /&gt;</span></div><div class="line">mount: Permission denied</div></pre></td></tr></table></figure>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">bogon:~ geelong$ adb root</div><div class="line">adbd is already running as root</div><div class="line">bogon:~ geelong$ adb remount</div><div class="line">dm_verity is enabled on the system partition.</div><div class="line">Use <span class="string">"adb disable-verity"</span> to <span class="built_in">disable</span> verity.</div><div class="line">If you <span class="keyword">do</span> not, remount may succeed, however, you will still not be able to write to these volumes.</div><div class="line">remount of /system failed: Read-only file system</div><div class="line">remount failed</div><div class="line">bogon:~ geelong$ adb <span class="built_in">disable</span>-verity</div><div class="line">Verity disabled on /system</div><div class="line">Now reboot your device <span class="keyword">for</span> settings to take effect</div><div class="line">bogon:~ geelong$ adb reboot</div><div class="line">bogon:~ geelong$ adb root</div><div class="line">restarting adbd as root</div><div class="line">bogon:~ geelong$ adb remount</div><div class="line">remount succeeded</div><div class="line">bogon:~ geelong$ adb shell</div><div class="line">root@shamu:/ <span class="comment"># cd /sys</span></div><div class="line">sys/    system/ </div><div class="line">root@shamu:/ <span class="comment"># cd /system/xbin/                                                </span></div><div class="line">root@shamu:/system/xbin <span class="comment"># ll</span></div><div class="line">/system/bin/sh: ll: not found</div><div class="line">127|root@shamu:/system/xbin <span class="comment"># cp /sdcard/test/busybox    </span></div><div class="line">1|root@shamu:/system/xbin <span class="comment"># ./busybox --install .</span></div></pre></td></tr></table></figure>
+<h1 id="添加ll命令"><a href="#添加ll命令" class="headerlink" title="添加ll命令"></a>添加ll命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi ll</div><div class="line">ls <span class="_">-l</span> <span class="variable">$@</span></div></pre></td></tr></table></figure>
+      
+    </div>
 
-      <h1 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/30/build-Android-6-0-in-Mac-10-11/" itemprop="url">
-              
-                <span itemprop="name">在Mac 10.11编译Android 6.0</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-30T22:59:22+08:00"
-              content="2016-07-30" >
-          07-30
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/busybox/" rel="tag">#busybox</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/31/launchctl-add-log/" rel="next" title="launchctl给shadowsocks添加日志信息">
+                <i class="fa fa-chevron-left"></i> launchctl给shadowsocks添加日志信息
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -262,6 +364,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/01/busybox-install/"
+           data-title="Android6.0 userdebug版安装busybox" data-url="https://geelong.github.io/2016/08/01/busybox-install/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -281,8 +391,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -325,6 +444,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载对应版本的busybox"><span class="nav-number">1.</span> <span class="nav-text">下载对应版本的busybox</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#remount-system不上"><span class="nav-number">2.1.</span> <span class="nav-text">remount system不上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">2.2.</span> <span class="nav-text">解决办法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加ll命令"><span class="nav-number">3.</span> <span class="nav-text">添加ll命令</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -440,6 +570,10 @@ PV: 10000<span id="busuanzi_value_site_pv"></span>
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
