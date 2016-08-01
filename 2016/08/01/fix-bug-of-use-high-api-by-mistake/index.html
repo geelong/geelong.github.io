@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="lint,todo," />
 
 
 
@@ -84,12 +84,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="geelong's home">
-<meta property="og:url" content="https://geelong.github.io/archives/2016/07/index.html">
+<meta name="description" content="起因我们的app从api=10开始支持，然后写了这么一行代码
+1view.setAlpha(0);
+一路测试都是顺利的，直到灰度测试后，在2.3的系统发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修复一个误用高版本系统api的bug和感悟">
+<meta property="og:url" content="https://geelong.github.io/2016/08/01/fix-bug-of-use-high-api-by-mistake/index.html">
 <meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="起因我们的app从api=10开始支持，然后写了这么一行代码
+1view.setAlpha(0);
+一路测试都是顺利的，直到灰度测试后，在2.3的系统发现">
+<meta property="og:updated_time" content="2016-08-01T12:48:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="geelong's home">
+<meta name="twitter:title" content="修复一个误用高版本系统api的bug和感悟">
+<meta name="twitter:description" content="起因我们的app从api=10开始支持，然后写了这么一行代码
+1view.setAlpha(0);
+一路测试都是顺利的，直到灰度测试后，在2.3的系统发现">
 
 
 
@@ -110,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="https://geelong.github.io/archives/2016/07/"/>
+  <link rel="canonical" href="https://geelong.github.io/2016/08/01/fix-bug-of-use-high-api-by-mistake/"/>
 
-  <title> 目录 | geelong's home </title>
+  <title> 修复一个误用高版本系统api的bug和感悟 | geelong's home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +153,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -215,177 +225,156 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 7 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/31/launchctl-add-log/" itemprop="url">
-              
-                <span itemprop="name">launchctl给shadowsocks添加日志信息</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-31T15:32:43+08:00"
-              content="2016-07-31" >
-          07-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/31/terminal-use-proxy/" itemprop="url">
-              
-                <span itemprop="name">Mac终端设置代理</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-31T15:01:39+08:00"
-              content="2016-07-31" >
-          07-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/30/markdown-language/" itemprop="url">
-              
-                <span itemprop="name">markdown 语法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-30T23:30:20+08:00"
-              content="2016-07-30" >
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/30/build-Android-6-0-in-Mac-10-11/" itemprop="url">
-              
-                <span itemprop="name">在Mac 10.11编译Android 6.0</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-30T22:59:22+08:00"
-              content="2016-07-30" >
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                修复一个误用高版本系统api的bug和感悟
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-01T20:22:25+08:00" content="2016-08-01">
+              2016-08-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/01/fix-bug-of-use-high-api-by-mistake/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/fix-bug-of-use-high-api-by-mistake/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/01/fix-bug-of-use-high-api-by-mistake/" class="leancloud_visitors" data-flag-title="修复一个误用高版本系统api的bug和感悟">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>我们的app从api=10开始支持，然后写了这么一行代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setAlpha(<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<p>一路测试都是顺利的，直到灰度测试后，在2.3的系统发现</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java.lang.NoSuchMethodError:android.widget.TextView.setAlpha</div></pre></td></tr></table></figure>
+<p>其实原因很简单，就是setAlpha方法是在api=11的时候加的，因为用了instantRun(minSdkVersion 21)所以开发的时候ide一直没有警告</p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>在build.gradle添加lint检查，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">lintOptions &#123;</div><div class="line">       abortOnError <span class="literal">false</span></div><div class="line">       check <span class="string">'NewApi'</span>, <span class="string">'InlinedApi'</span></div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew lint</div></pre></td></tr></table></figure>
+<p>然后看生成的报告，就能直到哪些用了超过最低支持版本的api了，对于那些做好了版本判断和明确是高版本才会调用的方法需要加@TargetApi，避免每次报告都生成一大堆信息。 <strong>信息太多了就不是信息了</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@TargetApi</span>(<span class="number">11</span>)</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span></span></div></pre></td></tr></table></figure>
+<h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><h3 id="找出同类问题"><a href="#找出同类问题" class="headerlink" title="找出同类问题"></a>找出同类问题</h3><h3 id="避免以后发生类似问题"><a href="#避免以后发生类似问题" class="headerlink" title="避免以后发生类似问题"></a>避免以后发生类似问题</h3><p>解决问题只解决看到的问题是最基础的，然后是解决现在的同类问题，由这个问题发现的其它问题，如何避免后续发生类似的问题</p>
+<h1 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h1><p>需要执行命令才能看到报告，难免后来某次紧急修改没有做这一步，引入了类似问题。但是每次都生成报告，会影响打包速度，毕竟不是每次都能分析出问题的。如何完善，继续思考。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lint/" rel="tag">#lint</a>
+          
+            <a href="/tags/todo/" rel="tag">#todo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/busybox-install/" rel="next" title="Android6.0 userdebug版安装busybox">
+                <i class="fa fa-chevron-left"></i> Android6.0 userdebug版安装busybox
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/01/use-proxy-in-android2-3/" rel="prev" title="在android2.3使用代理服务器">
+                在android2.3使用代理服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -393,6 +382,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/01/fix-bug-of-use-high-api-by-mistake/"
+           data-title="修复一个误用高版本系统api的bug和感悟" data-url="https://geelong.github.io/2016/08/01/fix-bug-of-use-high-api-by-mistake/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -412,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -456,6 +462,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改进"><span class="nav-number">2.</span> <span class="nav-text">改进</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-number">2.2.</span> <span class="nav-text">意义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#找出同类问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">找出同类问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免以后发生类似问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">避免以后发生类似问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#todo"><span class="nav-number">3.</span> <span class="nav-text">todo</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -571,11 +588,9 @@ PV: 10000<span id="busuanzi_value_site_pv"></span>
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
