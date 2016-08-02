@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="aosp,debug," />
 
 
 
@@ -84,13 +84,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://geelong.github.io/tags/index.html">
+<meta name="description" content="具体参考下面文章5
+参考文章：如何使用Android Studio开发/调试Android源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Android6.0.2 aosp系统debug没有源码的app">
+<meta property="og:url" content="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/index.html">
 <meta property="og:site_name" content="geelong's home">
-<meta property="og:updated_time" content="2016-07-30T17:00:05.000Z">
+<meta property="og:description" content="具体参考下面文章5
+参考文章：如何使用Android Studio开发/调试Android源码">
+<meta property="og:image" content="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/1.png">
+<meta property="og:image" content="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/2.png">
+<meta property="og:image" content="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/3.png">
+<meta property="og:updated_time" content="2016-08-02T15:24:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="使用Android6.0.2 aosp系统debug没有源码的app">
+<meta name="twitter:description" content="具体参考下面文章5
+参考文章：如何使用Android Studio开发/调试Android源码">
+<meta name="twitter:image" content="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/1.png">
 
 
 
@@ -111,15 +121,9 @@
 
 
 
-  <link rel="canonical" href="https://geelong.github.io/tags/"/>
+  <link rel="canonical" href="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/"/>
 
-  <title>
-  
-
-  
-    标签 | geelong's home
-  
-</title>
+  <title> 使用Android6.0.2 aosp系统debug没有源码的app | geelong's home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -150,7 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -252,16 +256,143 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 20 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Android6.0.2 aosp系统debug没有源码的app
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T23:05:53+08:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/02/how-to-debug-app-without-source/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/how-to-debug-app-without-source/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/02/how-to-debug-app-without-source/" class="leancloud_visitors" data-flag-title="使用Android6.0.2 aosp系统debug没有源码的app">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/Android-Source/" style="font-size: 12px; color: #ccc">Android Source</a> <a href="/tags/Android-Studio/" style="font-size: 12px; color: #ccc">Android Studio</a> <a href="/tags/Android6-0/" style="font-size: 12px; color: #ccc">Android6.0</a> <a href="/tags/android/" style="font-size: 12px; color: #ccc">android</a> <a href="/tags/android2-3/" style="font-size: 12px; color: #ccc">android2.3</a> <a href="/tags/aosp/" style="font-size: 30px; color: #111">aosp</a> <a href="/tags/bash/" style="font-size: 12px; color: #ccc">bash</a> <a href="/tags/bugfix/" style="font-size: 12px; color: #ccc">bugfix</a> <a href="/tags/busybox/" style="font-size: 12px; color: #ccc">busybox</a> <a href="/tags/debug/" style="font-size: 12px; color: #ccc">debug</a> <a href="/tags/launchctl/" style="font-size: 12px; color: #ccc">launchctl</a> <a href="/tags/lint/" style="font-size: 12px; color: #ccc">lint</a> <a href="/tags/mac/" style="font-size: 12px; color: #ccc">mac</a> <a href="/tags/markdown/" style="font-size: 12px; color: #ccc">markdown</a> <a href="/tags/mou/" style="font-size: 12px; color: #ccc">mou</a> <a href="/tags/proxy/" style="font-size: 12px; color: #ccc">proxy</a> <a href="/tags/proxychains/" style="font-size: 12px; color: #ccc">proxychains</a> <a href="/tags/shadowsocks/" style="font-size: 12px; color: #ccc">shadowsocks</a> <a href="/tags/todo/" style="font-size: 12px; color: #ccc">todo</a> <a href="/tags/原创/" style="font-size: 12px; color: #ccc">原创</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>具体参考下面文章5</p>
+<p><a href="http://www.cnblogs.com/Lefter/p/4176991.html" target="_blank" rel="external">参考文章：如何使用Android Studio开发/调试Android源码</a></p>
+<a id="more"></a>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><img src="/2016/08/02/how-to-debug-app-without-source/1.png" alt="1.png" title="">
+<img src="/2016/08/02/how-to-debug-app-without-source/2.png" alt="2.png" title="">
+<img src="/2016/08/02/how-to-debug-app-without-source/3.png" alt="3.png" title="">
+<p>可以debug了，有没有很激动</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/aosp/" rel="tag">#aosp</a>
+          
+            <a href="/tags/debug/" rel="tag">#debug</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/about-program/" rel="next" title="编程和武侠">
+                <i class="fa fa-chevron-left"></i> 编程和武侠
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -272,8 +403,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="tags/index.html"
-           data-title="tags" data-url="https://geelong.github.io/tags/index.html">
+      <div class="ds-thread" data-thread-key="2016/08/02/how-to-debug-app-without-source/"
+           data-title="使用Android6.0.2 aosp系统debug没有源码的app" data-url="https://geelong.github.io/2016/08/02/how-to-debug-app-without-source/">
       </div>
     
   </div>
@@ -297,8 +428,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -341,6 +481,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#过程"><span class="nav-number">1.</span> <span class="nav-text">过程</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -456,6 +607,10 @@ PV: 10000<span id="busuanzi_value_site_pv"></span>
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
