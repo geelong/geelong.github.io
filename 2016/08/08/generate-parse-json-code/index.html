@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="json," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="下面的工具可以根据json的数据，自动生成json的解析代码
+使用步骤
+1. GsonFormat安装
+AndroidStudio-preferences-plugins-install plugin from disk
+选择plugin_gsonformat.jar文件 
+
+根据提示，重启AndroidStudio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生成解析json的代码">
+<meta property="og:url" content="http://android.xieq29.com/2016/08/08/generate-parse-json-code/index.html">
+<meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="下面的工具可以根据json的数据，自动生成json的解析代码
+使用步骤
+1. GsonFormat安装
+AndroidStudio-preferences-plugins-install plugin from disk
+选择plugin_gsonformat.jar文件 
+
+根据提示，重启AndroidStudio">
+<meta property="og:image" content="http://android.xieq29.com/2016/08/08/generate-parse-json-code/input_dlg.png">
+<meta property="og:image" content="http://android.xieq29.com/2016/08/08/generate-parse-json-code/select_field_dlg.png">
+<meta property="og:updated_time" content="2016-09-07T15:09:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生成解析json的代码">
+<meta name="twitter:description" content="下面的工具可以根据json的数据，自动生成json的解析代码
+使用步骤
+1. GsonFormat安装
+AndroidStudio-preferences-plugins-install plugin from disk
+选择plugin_gsonformat.jar文件 
+
+根据提示，重启AndroidStudio">
+<meta name="twitter:image" content="http://android.xieq29.com/2016/08/08/generate-parse-json-code/input_dlg.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://android.xieq29.com/2016/08/08/generate-parse-json-code/"/>
+
+  <title> 生成解析json的代码 | geelong's home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a3fc0be93839d38b2b158b4b1e742f40";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">geelong's home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            目录
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '9sa3jUBxD7BXPsuhmg8a','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                生成解析json的代码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-08T21:58:04+08:00" content="2016-08-08">
+              2016-08-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/08/generate-parse-json-code/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/08/generate-parse-json-code/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/08/generate-parse-json-code/" class="leancloud_visitors" data-flag-title="生成解析json的代码">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>下面的工具可以根据json的数据，自动生成json的解析代码</p>
+<p>使用步骤</p>
+<h2 id="1-GsonFormat安装"><a href="#1-GsonFormat安装" class="headerlink" title="1. GsonFormat安装"></a>1. GsonFormat安装</h2><ul>
+<li>AndroidStudio-preferences-plugins-install plugin from disk</li>
+<li><p>选择<a href="/2016/08/08/generate-parse-json-code/plugin_gsonformat.jar" title="plugin_gsonformat.jar">plugin_gsonformat.jar</a>文件 </p>
+</li>
+<li><p>根据提示，重启AndroidStudio</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-生成Json解析代码"><a href="#2-生成Json解析代码" class="headerlink" title="2.生成Json解析代码"></a>2.生成Json解析代码</h2><h3 id="alt-s-弹出生成代码的对话框-快捷键可能不同，可以在快捷键列表里查一下"><a href="#alt-s-弹出生成代码的对话框-快捷键可能不同，可以在快捷键列表里查一下" class="headerlink" title="alt+s 弹出生成代码的对话框(快捷键可能不同，可以在快捷键列表里查一下)"></a>alt+s 弹出生成代码的对话框(快捷键可能不同，可以在快捷键列表里查一下)</h3><img src="/2016/08/08/generate-parse-json-code/input_dlg.png" alt="input_dlg.png" title="">
+<h3 id="在对话框里张贴json格式的数据"><a href="#在对话框里张贴json格式的数据" class="headerlink" title="在对话框里张贴json格式的数据"></a>在对话框里张贴json格式的数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"><span class="string">"url"</span>:<span class="string">"abc"</span>,</div><div class="line"><span class="string">"urls"</span>:[<span class="string">"abc"</span>],</div><div class="line"><span class="string">"type"</span>:<span class="number">1</span>,</div><div class="line"><span class="string">"iamge"</span>:&#123;</div><div class="line">    <span class="string">"desc"</span>:&#123;</div><div class="line">            <span class="string">"name"</span>:<span class="string">"abc"</span>,</div><div class="line">            <span class="string">"age"</span>: <span class="number">123</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<img src="/2016/08/08/generate-parse-json-code/select_field_dlg.png" alt="select_field_dlg.png" title="">
+<p>一直点击OK</p>
+<h3 id="生成代码如下"><a href="#生成代码如下" class="headerlink" title="生成代码如下"></a>生成代码如下</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.json.JSONArray;</div><div class="line"><span class="keyword">import</span> org.json.JSONObject;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created on 16/9/6.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String URLS = <span class="string">"urls"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String IAMGE = <span class="string">"iamge"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String URL = <span class="string">"url"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TYPE = <span class="string">"type"</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * url : abc</div><div class="line">     * urls : ["abc"]</div><div class="line">     * type : 1</div><div class="line">     * iamge : &#123;"desc":&#123;"name":"abc","age":123&#125;&#125;</div><div class="line">     */</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String url;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> type;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * desc : &#123;"name":"abc","age":123&#125;</div><div class="line">     */</div><div class="line"></div><div class="line">    <span class="keyword">private</span> IamgeBean iamge;</div><div class="line">    <span class="keyword">private</span> List&lt;String&gt; urls;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * auto generate from gsonfromat</div><div class="line">     * <span class="doctag">@param</span> json</div><div class="line">     * <span class="doctag">@return</span> null if parse error</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Test <span class="title">fromJson</span><span class="params">(JSONObject json)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Test item = <span class="keyword">new</span> Test();</div><div class="line">            item.url = json.has(URL) ? json.optString(URL) : <span class="string">""</span>;</div><div class="line">            item.type = json.optInt(TYPE);</div><div class="line">            JSONObject iamgeJson = json.optJSONObject(IAMGE);</div><div class="line">            <span class="keyword">if</span> (iamgeJson != <span class="keyword">null</span>) &#123;</div><div class="line">                item.iamge = IamgeBean.fromJson(iamgeJson);</div><div class="line">            &#125;</div><div class="line">            JSONArray urlsJsonArray = json.optJSONArray(URLS);</div><div class="line">            List&lt;String&gt; urlsList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">if</span> (urlsJsonArray != <span class="keyword">null</span> &amp;&amp; urlsJsonArray.length() &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; urlsJsonArray.length(); i++) &#123;</div><div class="line">                    <span class="keyword">if</span> (!urlsJsonArray.isNull(i)) &#123;</div><div class="line">                        urlsList.add(urlsJsonArray.optString(i));</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            item.urls = urlsList;</div><div class="line">            <span class="keyword">return</span> item;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUrl</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUrl</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.url = url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getType</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> type;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.type = type;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> IamgeBean <span class="title">getIamge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> iamge;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIamge</span><span class="params">(IamgeBean iamge)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.iamge = iamge;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getUrls</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> urls;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUrls</span><span class="params">(List&lt;String&gt; urls)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.urls = urls;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IamgeBean</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DESC = <span class="string">"desc"</span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * name : abc</div><div class="line">         * age : 123</div><div class="line">         */</div><div class="line"></div><div class="line">        <span class="keyword">private</span> DescBean desc;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * auto generate from gsonfromat</div><div class="line">         * throw exception if parse error</div><div class="line">         * <span class="doctag">@param</span> json</div><div class="line">         * <span class="doctag">@return</span></div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IamgeBean <span class="title">fromJson</span><span class="params">(JSONObject json)</span> </span>&#123;</div><div class="line">            IamgeBean item = <span class="keyword">new</span> IamgeBean();</div><div class="line">            JSONObject descJson = json.optJSONObject(DESC);</div><div class="line">            <span class="keyword">if</span> (descJson != <span class="keyword">null</span>) &#123;</div><div class="line">                item.desc = DescBean.fromJson(descJson);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> item;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> DescBean <span class="title">getDesc</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> desc;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDesc</span><span class="params">(DescBean desc)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.desc = desc;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DescBean</span> </span>&#123;</div><div class="line">            <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String NAME = <span class="string">"name"</span>;</div><div class="line">            <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AGE = <span class="string">"age"</span>;</div><div class="line">            <span class="keyword">private</span> String name;</div><div class="line">            <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * auto generate from gsonfromat</div><div class="line">             * throw exception if parse error</div><div class="line">             * <span class="doctag">@param</span> json</div><div class="line">             * <span class="doctag">@return</span></div><div class="line">             */</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DescBean <span class="title">fromJson</span><span class="params">(JSONObject json)</span> </span>&#123;</div><div class="line">                DescBean item = <span class="keyword">new</span> DescBean();</div><div class="line">                item.name = json.has(NAME) ? json.optString(NAME) : <span class="string">""</span>;</div><div class="line">                item.age = json.optInt(AGE);</div><div class="line"></div><div class="line">                <span class="keyword">return</span> item;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> name;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">                <span class="keyword">this</span>.name = name;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> age;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">                <span class="keyword">this</span>.age = age;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-Code-Review"><a href="#3-Code-Review" class="headerlink" title="3.Code Review"></a>3.Code Review</h2><p>对于嵌套结构复杂的代码，最好进行codeReview</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/json/" rel="tag">#json</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/how-to-debug-app-without-source/" rel="next" title="使用Android6.0.2 aosp系统debug没有源码的app">
+                <i class="fa fa-chevron-left"></i> 使用Android6.0.2 aosp系统debug没有源码的app
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/10/how-to-see-jar-compile-jdk-version/" rel="prev" title="如何查看jar编译的jdk版本">
+                如何查看jar编译的jdk版本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/08/generate-parse-json-code/"
+           data-title="生成解析json的代码" data-url="http://android.xieq29.com/2016/08/08/generate-parse-json-code/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="geelong" />
+          <p class="site-author-name" itemprop="name">geelong</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-GsonFormat安装"><span class="nav-number">1.</span> <span class="nav-text">1. GsonFormat安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-生成Json解析代码"><span class="nav-number">2.</span> <span class="nav-text">2.生成Json解析代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alt-s-弹出生成代码的对话框-快捷键可能不同，可以在快捷键列表里查一下"><span class="nav-number">2.1.</span> <span class="nav-text">alt+s 弹出生成代码的对话框(快捷键可能不同，可以在快捷键列表里查一下)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在对话框里张贴json格式的数据"><span class="nav-number">2.2.</span> <span class="nav-text">在对话框里张贴json格式的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成代码如下"><span class="nav-number">2.3.</span> <span class="nav-text">生成代码如下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Code-Review"><span class="nav-number">3.</span> <span class="nav-text">3.Code Review</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+PV: 10000<span id="busuanzi_value_site_pv"></span>
+<span id="busuanzi_container_site_uv">
+  UV: 10000<span id="busuanzi_value_site_uv"></span>
+</span>
+</span>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">geelong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+<br/>
+
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"geelong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Lz0Dmy705eNyXrN8c65fUxJY-gzGzoHsz", "OKHs59WSOKyKuFQamDxNyAhh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

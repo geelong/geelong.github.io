@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="编译sdk,查看隐藏api," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="意义
+看View等源码不飘红了，看着更方便
+单步跟踪更方便
+不用经常打开庞大的aosp项目，看个别方法的实现。提高开发效率
+其它app运行在aosp的机器上时，可以通过debug查看调用了那些系统api
+
+环境
+Android aosp 6.0(23)
+java 1.7
+mac
+
+编译sdk步骤初始化编译环境1source build/envsetup.sh
+设定编译目标1lunch sdk-en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译Android sdk,添加隐藏代码">
+<meta property="og:url" content="http://android.xieq29.com/2016/09/07/how-to-build-sdk/index.html">
+<meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="意义
+看View等源码不飘红了，看着更方便
+单步跟踪更方便
+不用经常打开庞大的aosp项目，看个别方法的实现。提高开发效率
+其它app运行在aosp的机器上时，可以通过debug查看调用了那些系统api
+
+环境
+Android aosp 6.0(23)
+java 1.7
+mac
+
+编译sdk步骤初始化编译环境1source build/envsetup.sh
+设定编译目标1lunch sdk-en">
+<meta property="og:updated_time" content="2016-09-07T15:00:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编译Android sdk,添加隐藏代码">
+<meta name="twitter:description" content="意义
+看View等源码不飘红了，看着更方便
+单步跟踪更方便
+不用经常打开庞大的aosp项目，看个别方法的实现。提高开发效率
+其它app运行在aosp的机器上时，可以通过debug查看调用了那些系统api
+
+环境
+Android aosp 6.0(23)
+java 1.7
+mac
+
+编译sdk步骤初始化编译环境1source build/envsetup.sh
+设定编译目标1lunch sdk-en">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://android.xieq29.com/2016/09/07/how-to-build-sdk/"/>
+
+  <title> 编译Android sdk,添加隐藏代码 | geelong's home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a3fc0be93839d38b2b158b4b1e742f40";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">geelong's home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            目录
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '9sa3jUBxD7BXPsuhmg8a','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编译Android sdk,添加隐藏代码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T22:19:23+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/how-to-build-sdk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/how-to-build-sdk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/07/how-to-build-sdk/" class="leancloud_visitors" data-flag-title="编译Android sdk,添加隐藏代码">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><ul>
+<li>看View等源码不飘红了，看着更方便</li>
+<li>单步跟踪更方便</li>
+<li>不用经常打开庞大的aosp项目，看个别方法的实现。提高开发效率</li>
+<li>其它app运行在aosp的机器上时，可以通过debug查看调用了那些系统api</li>
+</ul>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>Android aosp 6.0(23)</li>
+<li>java 1.7</li>
+<li>mac</li>
+</ul>
+<h3 id="编译sdk步骤"><a href="#编译sdk步骤" class="headerlink" title="编译sdk步骤"></a>编译sdk步骤</h3><h4 id="初始化编译环境"><a href="#初始化编译环境" class="headerlink" title="初始化编译环境"></a>初始化编译环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source build/envsetup.sh</div></pre></td></tr></table></figure>
+<h4 id="设定编译目标"><a href="#设定编译目标" class="headerlink" title="设定编译目标"></a>设定编译目标</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lunch sdk-eng</div></pre></td></tr></table></figure>
+<h4 id="通过以下命令编译SDK"><a href="#通过以下命令编译SDK" class="headerlink" title="通过以下命令编译SDK"></a>通过以下命令编译SDK</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">make sdk</div><div class="line"></div><div class="line">成功输出</div><div class="line">\e[0;32m#### make completed successfully (01:34:53 (hh:mm:ss)) ####\e[00m</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="编译完成后产物"><a href="#编译完成后产物" class="headerlink" title="编译完成后产物"></a>编译完成后产物</h3><h4 id="classes-full-debug-jar"><a href="#classes-full-debug-jar" class="headerlink" title="classes-full-debug.jar"></a>classes-full-debug.jar</h4><ul>
+<li>路径： out\target\common\obj\JAVA_LIBRARIES\framework_intermediates</li>
+<li>说明： 只有字节码，没有资源</li>
+</ul>
+<h4 id="sdk（android-jar）"><a href="#sdk（android-jar）" class="headerlink" title="sdk（android.jar）"></a>sdk（android.jar）</h4><ul>
+<li>路径： out\target\common\sdk\sdk</li>
+<li>说明： 有字节码和资源</li>
+</ul>
+<h3 id="添加隐藏代码的步骤"><a href="#添加隐藏代码的步骤" class="headerlink" title="添加隐藏代码的步骤"></a>添加隐藏代码的步骤</h3><h4 id="合并编译好的代码"><a href="#合并编译好的代码" class="headerlink" title="合并编译好的代码"></a>合并编译好的代码</h4><p>class-full-debug.jar和android.jar合并，前者解压的文件拷贝到后者解压的文件夹中去，然后重新压缩成android.jar。把生成的sdk拷贝到已有sdk目录对应路径下</p>
+<h4 id="在已有sdk源码目录添加下面源码"><a href="#在已有sdk源码目录添加下面源码" class="headerlink" title="在已有sdk源码目录添加下面源码"></a>在已有sdk源码目录添加下面源码</h4><ul>
+<li>frameworks/base/core/java</li>
+<li>/out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/src/core/java</li>
+</ul>
+<h4 id="后续需要看的类也可以根据这种方式，把class添加到android-jar-把Java代码放到源码目录下"><a href="#后续需要看的类也可以根据这种方式，把class添加到android-jar-把Java代码放到源码目录下" class="headerlink" title="后续需要看的类也可以根据这种方式，把class添加到android.jar,把Java代码放到源码目录下"></a>后续需要看的类也可以根据这种方式，把class添加到android.jar,把Java代码放到源码目录下</h4><h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><ul>
+<li>View不飘红了</li>
+<li>可以直接查看ActivityThread</li>
+<li>还有部分第三方类不可以查看，可以根据上面方法继续添加</li>
+</ul>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><h4 id="java环境不对"><a href="#java环境不对" class="headerlink" title="java环境不对"></a>java环境不对</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Copying: out/target/common/obj/JAVA_LIBRARIES/android-support-v7-palette_intermediates/classes.jar</div><div class="line">Docs droiddoc: out/target/common/docs/offline-sdk</div><div class="line">frameworks/base/media/java/android/media/SRTRenderer.java:168: 警告: <span class="string">'_'</span> 用作标识符</div><div class="line">        final int _ = 0;</div><div class="line">                  ^</div><div class="line">  (Java SE 8 之后的发行版中可能不支持使用 <span class="string">'_'</span> 作为标识符)</div><div class="line">frameworks/base/media/java/android/media/SRTRenderer.java:187: 警告: <span class="string">'_'</span> 用作标识符</div><div class="line">            Message msg = mEventHandler.obtainMessage(MEDIA_TIMED_TEXT, _, _, parcel);</div><div class="line">                                                                        ^</div><div class="line">  (Java SE 8 之后的发行版中可能不支持使用 <span class="string">'_'</span> 作为标识符)</div><div class="line">frameworks/base/media/java/android/media/SRTRenderer.java:187: 警告: <span class="string">'_'</span> 用作标识符</div><div class="line">            Message msg = mEventHandler.obtainMessage(MEDIA_TIMED_TEXT, _, _, parcel);</div><div class="line">                                                                           ^</div><div class="line">  (Java SE 8 之后的发行版中可能不支持使用 <span class="string">'_'</span> 作为标识符)</div><div class="line">javadoc: 警告 - 找到程序包 <span class="string">"android.media.effect"</span> 的多个程序包注释源</div><div class="line">/Volumes/android/6.0.0_r2/frameworks/base/docs/html/guide/topics/ui/drag-drop.jd:-980: error 101: Unresolved link/see tag <span class="string">"android.view.View.DragShadowBuilder#View.DragShadowBuilder()"</span> <span class="keyword">in</span> [null]</div><div class="line">/Volumes/android/6.0.0_r2/frameworks/base/docs/html/guide/topics/ui/drag-drop.jd:-980: error 101: Unresolved link/see tag <span class="string">"android.view.View.DragShadowBuilder#View.DragShadowBuilder(View)"</span> <span class="keyword">in</span> [null]</div><div class="line">frameworks/base/core/java/android/app/job/JobScheduler.java:22: error 101: Unresolved link/see tag <span class="string">"android.app.job.JobInfo.Builder#JobInfo.Builder(int,android.content.ComponentName)"</span> <span class="keyword">in</span> android.app.job.JobScheduler</div><div class="line">frameworks/base/core/java/android/view/View.java:19484: error 101: Unresolved link/see tag <span class="string">"#View.DragShadowBuilder()"</span> <span class="keyword">in</span> android.view.View.DragShadowBuilder</div><div class="line">frameworks/base/core/java/android/view/View.java:19484: error 101: Unresolved link/see tag <span class="string">"#View.DragShadowBuilder(View)"</span> <span class="keyword">in</span> android.view.View.DragShadowBuilder</div><div class="line">DroidDoc took 185 sec. to write docs to out/target/common/docs/offline-sdk</div><div class="line">4 个警告</div><div class="line">make: *** [out/target/common/docs/offline-sdk-timestamp] Error 45</div><div class="line"></div><div class="line">\e[0;31m<span class="comment">#### make failed to build some targets (01:20:45 (hh:mm:ss)) ####\e[00m</span></div></pre></td></tr></table></figure>
+<h5 id="设置jdk-版本为1-7"><a href="#设置jdk-版本为1-7" class="headerlink" title="设置jdk 版本为1.7"></a>设置jdk 版本为1.7</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=`/usr/libexec/java_home -v 1.7`</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
+<h3 id="压缩android-jar的路径不对"><a href="#压缩android-jar的路径不对" class="headerlink" title="压缩android.jar的路径不对"></a>压缩android.jar的路径不对</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">致命错误: 在类路径或引导类路径中找不到程序包 java.lang</div></pre></td></tr></table></figure>
+<p>原因：<br>对android.jar解压缩后合并的文件的父文件夹进行压缩，导致多了一层文件夹。用zip命令，对所有合并完成的文件进行压缩就好了</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编译sdk/" rel="tag">#编译sdk</a>
+          
+            <a href="/tags/查看隐藏api/" rel="tag">#查看隐藏api</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/android23-use-apache-http/" rel="next" title="android23使用apache-http">
+                <i class="fa fa-chevron-left"></i> android23使用apache-http
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/how-to-build-sdk/"
+           data-title="编译Android sdk,添加隐藏代码" data-url="http://android.xieq29.com/2016/09/07/how-to-build-sdk/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="geelong" />
+          <p class="site-author-name" itemprop="name">geelong</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#意义"><span class="nav-number">1.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译sdk步骤"><span class="nav-number">3.</span> <span class="nav-text">编译sdk步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化编译环境"><span class="nav-number">3.1.</span> <span class="nav-text">初始化编译环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设定编译目标"><span class="nav-number">3.2.</span> <span class="nav-text">设定编译目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过以下命令编译SDK"><span class="nav-number">3.3.</span> <span class="nav-text">通过以下命令编译SDK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译完成后产物"><span class="nav-number">4.</span> <span class="nav-text">编译完成后产物</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classes-full-debug-jar"><span class="nav-number">4.1.</span> <span class="nav-text">classes-full-debug.jar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdk（android-jar）"><span class="nav-number">4.2.</span> <span class="nav-text">sdk（android.jar）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加隐藏代码的步骤"><span class="nav-number">5.</span> <span class="nav-text">添加隐藏代码的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#合并编译好的代码"><span class="nav-number">5.1.</span> <span class="nav-text">合并编译好的代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在已有sdk源码目录添加下面源码"><span class="nav-number">5.2.</span> <span class="nav-text">在已有sdk源码目录添加下面源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后续需要看的类也可以根据这种方式，把class添加到android-jar-把Java代码放到源码目录下"><span class="nav-number">5.3.</span> <span class="nav-text">后续需要看的类也可以根据这种方式，把class添加到android.jar,把Java代码放到源码目录下</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果"><span class="nav-number">6.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题"><span class="nav-number">7.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java环境不对"><span class="nav-number">7.1.</span> <span class="nav-text">java环境不对</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设置jdk-版本为1-7"><span class="nav-number">7.1.1.</span> <span class="nav-text">设置jdk 版本为1.7</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩android-jar的路径不对"><span class="nav-number">8.</span> <span class="nav-text">压缩android.jar的路径不对</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+PV: 10000<span id="busuanzi_value_site_pv"></span>
+<span id="busuanzi_container_site_uv">
+  UV: 10000<span id="busuanzi_value_site_uv"></span>
+</span>
+</span>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">geelong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+<br/>
+
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"geelong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Lz0Dmy705eNyXrN8c65fUxJY-gzGzoHsz", "OKHs59WSOKyKuFQamDxNyAhh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
