@@ -267,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/11/intellij-plugin-develop/" itemprop="url">
-                  intellij插件开发
+                <a class="post-title-link" href="/2016/11/30/gfxinfo源码/" itemprop="url">
+                  gfxinfo源码
                 </a>
               
             
@@ -281,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T22:09:31+08:00" content="2016-08-11">
-              2016-08-11
+            <time itemprop="dateCreated" datetime="2016-11-30T22:50:46+08:00" content="2016-11-30">
+              2016-11-30
             </time>
           </span>
 
@@ -292,8 +292,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/11/intellij-plugin-develop/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/intellij-plugin-develop/" itemprop="commentsCount"></span>
+                <a href="/2016/11/30/gfxinfo源码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/30/gfxinfo源码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -303,7 +303,7 @@
 
           
           
-             <span id="/2016/08/11/intellij-plugin-develop/" class="leancloud_visitors" data-flag-title="intellij插件开发">
+             <span id="/2016/11/30/gfxinfo源码/" class="leancloud_visitors" data-flag-title="gfxinfo源码">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -326,9 +326,9 @@
 
       
         
-          <h2 id="jdk1-6编译插件"><a href="#jdk1-6编译插件" class="headerlink" title="jdk1.6编译插件"></a>jdk1.6编译插件</h2>
+          <p>通过adb shell dumpsys gfxinfo 包名 收集APP的绘制信息（Draw Process Execute），每秒收集1次。那么问题提来，下一秒收集的信息会不会和上一秒重复了呢？</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/11/intellij-plugin-develop/#more" rel="contents">
+            <a class="btn" href="/2016/11/30/gfxinfo源码/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -379,8 +379,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/10/how-to-see-jar-compile-jdk-version/" itemprop="url">
-                  如何查看jar编译的jdk版本
+                <a class="post-title-link" href="/2016/11/14/am-broadcast/" itemprop="url">
+                  am_broadcast
                 </a>
               
             
@@ -393,8 +393,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-10T10:37:46+08:00" content="2016-08-10">
-              2016-08-10
+            <time itemprop="dateCreated" datetime="2016-11-14T17:44:14+08:00" content="2016-11-14">
+              2016-11-14
             </time>
           </span>
 
@@ -404,8 +404,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/10/how-to-see-jar-compile-jdk-version/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/10/how-to-see-jar-compile-jdk-version/" itemprop="commentsCount"></span>
+                <a href="/2016/11/14/am-broadcast/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/14/am-broadcast/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -415,7 +415,7 @@
 
           
           
-             <span id="/2016/08/10/how-to-see-jar-compile-jdk-version/" class="leancloud_visitors" data-flag-title="如何查看jar编译的jdk版本">
+             <span id="/2016/11/14/am-broadcast/" class="leancloud_visitors" data-flag-title="am_broadcast">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -439,10 +439,12 @@
       
         
           
-            <h3 id="提取class文件"><a href="#提取class文件" class="headerlink" title="提取class文件"></a>提取class文件</h3><p><code>jar -xf plugin_translate.jar com/royll/varnamegodie/VarNameTranslate.class</code></p>
-<h3 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h3><p><code>javap -verbose com/royll/varnamegodie/VarNameTranslate.class  | head -20</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">minor version: 0</div><div class="line">major version: 52</div></pre></td></tr></table></figure>
-<p>52代表jdk8</p>
+            <p>adb发送广播的使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell am broadcast <span class="_">-a</span> actionname --es paramname paramval</div></pre></td></tr></table></figure>
+<p>参数前是 –（2个-），之前用了一个-，一直都不好用</p>
+<blockquote>
+<p>直接用adb发广播的好处有很多，最明显就是测试的效率提高，不需要做很多前提的准备，才能走相应逻辑</p>
+</blockquote>
 
           
         
@@ -492,8 +494,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/08/generate-parse-json-code/" itemprop="url">
-                  生成解析json的代码
+                <a class="post-title-link" href="/2016/11/01/git使用/" itemprop="url">
+                  git使用
                 </a>
               
             
@@ -506,8 +508,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-08T21:58:04+08:00" content="2016-08-08">
-              2016-08-08
+            <time itemprop="dateCreated" datetime="2016-11-01T15:58:34+08:00" content="2016-11-01">
+              2016-11-01
             </time>
           </span>
 
@@ -517,8 +519,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/08/generate-parse-json-code/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/08/generate-parse-json-code/" itemprop="commentsCount"></span>
+                <a href="/2016/11/01/git使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/git使用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -528,7 +530,7 @@
 
           
           
-             <span id="/2016/08/08/generate-parse-json-code/" class="leancloud_visitors" data-flag-title="生成解析json的代码">
+             <span id="/2016/11/01/git使用/" class="leancloud_visitors" data-flag-title="git使用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -551,17 +553,206 @@
 
       
         
-          <p>下面的工具可以根据json的数据，自动生成json的解析代码</p>
-<p>使用步骤</p>
-<h2 id="1-GsonFormat安装"><a href="#1-GsonFormat安装" class="headerlink" title="1. GsonFormat安装"></a>1. GsonFormat安装</h2><ul>
-<li>AndroidStudio-preferences-plugins-install plugin from disk</li>
-<li><p>选择<a href="/2016/08/08/generate-parse-json-code/plugin_gsonformat.jar" title="plugin_gsonformat.jar">plugin_gsonformat.jar</a>文件 </p>
+          
+            <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">初始化</div><div class="line">git init</div><div class="line"></div><div class="line">提交到本地库</div><div class="line">git add <span class="variable">$filename</span></div><div class="line">git commit -m <span class="variable">$msg</span> <span class="variable">$filename</span></div><div class="line"></div><div class="line"></div><div class="line">查看diff</div><div class="line">git diff <span class="variable">$filename</span></div><div class="line"></div><div class="line">查看修改</div><div class="line">git <span class="built_in">log</span></div></pre></td></tr></table></figure>
+<p>#回滚</p>
+<p>git reset –hard HEAD^</p>
+<ul>
+<li>HEAD^ 代表回到head前一个版本</li>
+<li><strong>只是回滚了本地库，并没有回滚工作目录</strong></li>
+</ul>
+<p>git checkout – $filename</p>
+<ul>
+<li>回滚工作目录，回滚后，和index一致</li>
+</ul>
+<h3 id="丢弃工作区的改动"><a href="#丢弃工作区的改动" class="headerlink" title="丢弃工作区的改动"></a>丢弃工作区的改动</h3><ul>
+<li>git checkout – &lt;文件&gt;…</li>
+</ul>
+<h3 id="撤出暂存区"><a href="#撤出暂存区" class="headerlink" title="撤出暂存区"></a>撤出暂存区</h3><ul>
+<li>git reset HEAD &lt;文件&gt;…</li>
+</ul>
+<h3 id="工作区提交到index"><a href="#工作区提交到index" class="headerlink" title="工作区提交到index"></a>工作区提交到index</h3><ul>
+<li>git add &lt;文件&gt;…</li>
+</ul>
+<h3 id="index提交到本地库"><a href="#index提交到本地库" class="headerlink" title="index提交到本地库"></a>index提交到本地库</h3><ul>
+<li>git commit -m $msg $file</li>
+</ul>
+<h3 id="查看提交到本地库的日志"><a href="#查看提交到本地库的日志" class="headerlink" title="查看提交到本地库的日志"></a>查看提交到本地库的日志</h3><ul>
+<li>git reflog (refrence log)</li>
+</ul>
+<h3 id="回滚到某个版本"><a href="#回滚到某个版本" class="headerlink" title="回滚到某个版本"></a>回滚到某个版本</h3><ul>
+<li>git reset –hard $commentId</li>
+</ul>
+<hr>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建dev分支，然后切换到dev分支："><a href="#创建dev分支，然后切换到dev分支：" class="headerlink" title="创建dev分支，然后切换到dev分支："></a>创建dev分支，然后切换到dev分支：</h3><ul>
+<li>git checkout -b dev</li>
+</ul>
+<h3 id="查看当前分支"><a href="#查看当前分支" class="headerlink" title="查看当前分支"></a>查看当前分支</h3><ul>
+<li>git branch</li>
+</ul>
+<h3 id="切换回master分支"><a href="#切换回master分支" class="headerlink" title="切换回master分支"></a>切换回master分支</h3><ul>
+<li>git checkout master</li>
+</ul>
+<h3 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h3><ul>
+<li>git merge dev<ul>
+<li>把dev的修改，合并到当前分支上</li>
+<li>没有冲突的话，是直接在本地库上合并的，不需要提交</li>
+</ul>
 </li>
-<li><p>根据提示，重启AndroidStudio</p>
+</ul>
+<h3 id="删除dev分支"><a href="#删除dev分支" class="headerlink" title="删除dev分支"></a>删除dev分支</h3><p>git branch -d dev </p>
+<hr>
+<h3 id="当前分支和fe分支比较diff"><a href="#当前分支和fe分支比较diff" class="headerlink" title="当前分支和fe分支比较diff"></a>当前分支和fe分支比较diff</h3><p> git diff fe</p>
+<h3 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h3><p>git help diff</p>
+<ul>
+<li>最后是具体命令</li>
+</ul>
+<h3 id="查看远程信息"><a href="#查看远程信息" class="headerlink" title="查看远程信息"></a>查看远程信息</h3><p>git remote -v</p>
+<h3 id="新建远程分支"><a href="#新建远程分支" class="headerlink" title="新建远程分支"></a>新建远程分支</h3><ol>
+<li>git checkout -b dev<ol>
+<li>新建本地分支</li>
+</ol>
+</li>
+<li>git branch –set-upstream-to=origin/dev<ol>
+<li>本地分支和远程分支关联</li>
+</ol>
+</li>
+<li>git push origin dev<ol>
+<li>推送本地修改到远程分支</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>步骤2可省略，步骤3push的时候，指定远程分支名字就可以</p>
+</blockquote>
+<h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><p>git branch -r -d origin/dev</p>
+<h3 id="查看本地分支对应的远程分支"><a href="#查看本地分支对应的远程分支" class="headerlink" title="查看本地分支对应的远程分支"></a>查看本地分支对应的远程分支</h3><p>git branch -vv    </p>
+<hr>
+<h3 id="如何关联到一个远程分支？"><a href="#如何关联到一个远程分支？" class="headerlink" title="如何关联到一个远程分支？"></a>如何关联到一个远程分支？</h3><p> git push –set-upstream origin test2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">设置之前</div><div class="line"> git br --v</div><div class="line">  master 71d0d31 first commit from svn <span class="built_in">export</span></div><div class="line">  <span class="built_in">test</span>1  c82f750 <span class="built_in">test</span>1</div><div class="line">* <span class="built_in">test</span>2  000bb8b <span class="built_in">test</span>2</div><div class="line"></div><div class="line"> git push --set-upstream origin <span class="built_in">test</span>2</div><div class="line"> </div><div class="line">设置之后</div><div class="line">git br -vv</div><div class="line">  master 71d0d31 [origin/master] first commit from svn <span class="built_in">export</span></div><div class="line">  <span class="built_in">test</span>1  c82f750 [origin/<span class="built_in">test</span>1] <span class="built_in">test</span>1</div><div class="line">* <span class="built_in">test</span>2  000bb8b [origin/<span class="built_in">test</span>2] <span class="built_in">test</span>2</div></pre></td></tr></table></figure>
+<p>设置完后，下次提交直接 git push 就好</p>
+<hr>
+<p>冲突解决</p>
+<p><a href="https://git-scm.com/book/zh/v1/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-%E9%85%8D%E7%BD%AE-Git" target="_blank" rel="external">merge tool设置</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/29/Dalvik虚拟机简要介绍和学习计划/" itemprop="url">
+                  Dalvik虚拟机简要介绍和学习计划读书笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-29T23:03:38+08:00" content="2016-10-29">
+              2016-10-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/29/Dalvik虚拟机简要介绍和学习计划/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/29/Dalvik虚拟机简要介绍和学习计划/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/29/Dalvik虚拟机简要介绍和学习计划/" class="leancloud_visitors" data-flag-title="Dalvik虚拟机简要介绍和学习计划读书笔记">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="http://blog.csdn.net/luoshengyang/article/details/8852432">Dalvik虚拟机简要介绍和学习计划</a></p>
+<ul>
+<li>介绍了dalvik的基本原理</li>
+<li>dalvik和java虚拟机的关系<ul>
+<li>dalvik基于寄存器，java虚拟机基于堆栈</li>
+<li>dalviks使用dex文件，相对于Java使用的class文件，压缩更好</li>
+</ul>
 </li>
 </ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/08/generate-parse-json-code/#more" rel="contents">
+            <a class="btn" href="/2016/10/29/Dalvik虚拟机简要介绍和学习计划/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -612,8 +803,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/02/how-to-debug-app-without-source/" itemprop="url">
-                  使用Android6.0.2 aosp系统debug没有源码的app
+                <a class="post-title-link" href="/2016/10/26/adb-am-start-uri丢参数的问题/" itemprop="url">
+                  adb am start uri丢参数的问题
                 </a>
               
             
@@ -626,8 +817,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T23:05:53+08:00" content="2016-08-02">
-              2016-08-02
+            <time itemprop="dateCreated" datetime="2016-10-26T23:14:32+08:00" content="2016-10-26">
+              2016-10-26
             </time>
           </span>
 
@@ -637,8 +828,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/02/how-to-debug-app-without-source/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/how-to-debug-app-without-source/" itemprop="commentsCount"></span>
+                <a href="/2016/10/26/adb-am-start-uri丢参数的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/adb-am-start-uri丢参数的问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -648,7 +839,7 @@
 
           
           
-             <span id="/2016/08/02/how-to-debug-app-without-source/" class="leancloud_visitors" data-flag-title="使用Android6.0.2 aosp系统debug没有源码的app">
+             <span id="/2016/10/26/adb-am-start-uri丢参数的问题/" class="leancloud_visitors" data-flag-title="adb am start uri丢参数的问题">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -671,10 +862,9 @@
 
       
         
-          <p>具体参考下面文章5</p>
-<p><a href="http://www.cnblogs.com/Lefter/p/4176991.html">参考文章：如何使用Android Studio开发/调试Android源码</a></p>
+          <p>adb shell am start uri会丢掉第二个后面的所有参数，需要在&amp;前加\转义，并使用下面的方式打开</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/02/how-to-debug-app-without-source/#more" rel="contents">
+            <a class="btn" href="/2016/10/26/adb-am-start-uri丢参数的问题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -725,8 +915,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/02/about-program/" itemprop="url">
-                  编程和武侠
+                <a class="post-title-link" href="/2016/10/26/Activity启动参数的封装/" itemprop="url">
+                  Activity启动参数的封装
                 </a>
               
             
@@ -739,8 +929,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T21:47:00+08:00" content="2016-08-02">
-              2016-08-02
+            <time itemprop="dateCreated" datetime="2016-10-26T23:09:14+08:00" content="2016-10-26">
+              2016-10-26
             </time>
           </span>
 
@@ -750,8 +940,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/02/about-program/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/about-program/" itemprop="commentsCount"></span>
+                <a href="/2016/10/26/Activity启动参数的封装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/Activity启动参数的封装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -761,7 +951,7 @@
 
           
           
-             <span id="/2016/08/02/about-program/" class="leancloud_visitors" data-flag-title="编程和武侠">
+             <span id="/2016/10/26/Activity启动参数的封装/" class="leancloud_visitors" data-flag-title="Activity启动参数的封装">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -784,123 +974,9 @@
 
       
         
-          
-            <p>编程和武侠有很多相似的地方。编程的基础知识好比内功，如数据结构和算法、操作系统、网络原理等。语言好比武功，如Java、c++、php等各种各样的语言，就像武侠里的各种武功，九阴真经、九阳神功之类的。ide好比武侠里的兵器。</p>
-<p>在繁杂的江湖里，如何在有限的时间里，学到行走江湖的绝技呢。有的人有一身的好内功，比如刚学会九阳神功的张无忌。高深的内功，助他在以后的江湖里，越走越顺。会了一门高深的内功后，发现其它的内功都是有相似性的。算是触类旁通吧。后面的学习就事半功倍了。</p>
-<p>工具嘛，初上手时，威力巨大。是快速提高实力的捷径。不过，随着武器的升级换代，不一直跟上步伐的话，终究还是免不了落后的。</p>
-<p>所以我觉得，最重要的是内功。武器和武功的学习量力而为吧。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/01/how-to-view-android-source-in-android-studio/" itemprop="url">
-                  在Android Studio上看Android源码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T23:15:19+08:00" content="2016-08-01">
-              2016-08-01
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/01/how-to-view-android-source-in-android-studio/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/how-to-view-android-source-in-android-studio/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/01/how-to-view-android-source-in-android-studio/" class="leancloud_visitors" data-flag-title="在Android Studio上看Android源码">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://blog.csdn.net/yanbober/article/details/48846331">步骤见这里</a></p>
-<p>下面是在android.iml里添加的排除部分目录，否则打开太慢了</p>
+          <p>给activity传参比较繁琐，有的直接在调用处构造intent，然后传参。但是这种方式不够内聚，删除参数的时候到处都需要改动，打开页面写相关代码也费时，容易漏参数。下面讨论几种传参数的方法</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/how-to-view-android-source-in-android-studio/#more" rel="contents">
+            <a class="btn" href="/2016/10/26/Activity启动参数的封装/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -951,8 +1027,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/01/how-to-debug-bash/" itemprop="url">
-                  如何debug bash
+                <a class="post-title-link" href="/2016/09/21/gradle常用task/" itemprop="url">
+                  gradle常用task
                 </a>
               
             
@@ -965,8 +1041,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T21:53:02+08:00" content="2016-08-01">
-              2016-08-01
+            <time itemprop="dateCreated" datetime="2016-09-21T11:44:16+08:00" content="2016-09-21">
+              2016-09-21
             </time>
           </span>
 
@@ -976,8 +1052,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/01/how-to-debug-bash/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/how-to-debug-bash/" itemprop="commentsCount"></span>
+                <a href="/2016/09/21/gradle常用task/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/gradle常用task/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -987,119 +1063,7 @@
 
           
           
-             <span id="/2016/08/01/how-to-debug-bash/" class="leancloud_visitors" data-flag-title="如何debug bash">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>下面是一个新建blog文章的脚本</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/how-to-debug-bash/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/01/use-proxy-in-android2-3/" itemprop="url">
-                  在android2.3使用代理服务器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T20:42:43+08:00" content="2016-08-01">
-              2016-08-01
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/01/use-proxy-in-android2-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/use-proxy-in-android2-3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/01/use-proxy-in-android2-3/" class="leancloud_visitors" data-flag-title="在android2.3使用代理服务器">
+             <span id="/2016/09/21/gradle常用task/" class="leancloud_visitors" data-flag-title="gradle常用task">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1123,7 +1087,9 @@
       
         
           
-            <p>android2.3系统的设置只对浏览器有效，太不好用了，然后发现个APP可以设置代理，不过貌似需要root权限<br><a href="https://github.com/geelong/blog/raw/dc949e3792130eb5b27c27c440fbd0dcfedbbc91/app/TransProxy3.08beta.apk" target="_blank" rel="external">下载地址</a></p>
+            <p>查看具体task帮助<br><code>./gradlew help --task  app.home:dependencies</code></p>
+<p>查看某个task的依赖</p>
+<p><code>./gradlew help --task  app.home:dependencies --configuration compile</code></p>
 
           
         
@@ -1173,8 +1139,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/01/fix-bug-of-use-high-api-by-mistake/" itemprop="url">
-                  修复一个误用高版本系统api的bug和感悟
+                <a class="post-title-link" href="/2016/09/14/RN-started/" itemprop="url">
+                  RN_started
                 </a>
               
             
@@ -1187,8 +1153,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T20:22:25+08:00" content="2016-08-01">
-              2016-08-01
+            <time itemprop="dateCreated" datetime="2016-09-14T12:10:33+08:00" content="2016-09-14">
+              2016-09-14
             </time>
           </span>
 
@@ -1198,8 +1164,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/01/fix-bug-of-use-high-api-by-mistake/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/fix-bug-of-use-high-api-by-mistake/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/RN-started/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/RN-started/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1209,7 +1175,7 @@
 
           
           
-             <span id="/2016/08/01/fix-bug-of-use-high-api-by-mistake/" class="leancloud_visitors" data-flag-title="修复一个误用高版本系统api的bug和感悟">
+             <span id="/2016/09/14/RN-started/" class="leancloud_visitors" data-flag-title="RN_started">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1232,14 +1198,34 @@
 
       
         
-          <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>我们的app从api=10开始支持，然后写了这么一行代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">view.setAlpha(<span class="number">0</span>);</div></pre></td></tr></table></figure>
-<p>一路测试都是顺利的，直到灰度测试后，在2.3的系统发现</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/fix-bug-of-use-high-api-by-mistake/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h3 id="hello-world新建和运行"><a href="#hello-world新建和运行" class="headerlink" title="hello world新建和运行"></a>hello world新建和运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">react-native init AwesomeProject</div><div class="line"><span class="built_in">cd</span> AwesomeProject</div><div class="line">react-native run-android</div></pre></td></tr></table></figure>
+<h3 id="开发的时候是从下面地址下载了js"><a href="#开发的时候是从下面地址下载了js" class="headerlink" title="开发的时候是从下面地址下载了js"></a>开发的时候是从下面地址下载了js</h3><p><a href="http://localhost:8081/index.android.bundle?platform=android&amp;dev=true&amp;hot=false&amp;minify=false" target="_blank" rel="external">http://localhost:8081/index.android.bundle?platform=android&amp;dev=true&amp;hot=false&amp;minify=false</a></p>
+<p>也可以保存这个文件放到APP上，app直接加载这个文件，就不用开服务器了</p>
+<h3 id="Android-5-0及以上-使用adb-reverse命令"><a href="#Android-5-0及以上-使用adb-reverse命令" class="headerlink" title="(Android 5.0及以上)使用adb reverse命令"></a>(Android 5.0及以上)使用adb reverse命令</h3><p>注意，这个选项只能在5.0以上版本(API 21+)的安卓设备上使用。<br>首先把你的设备通过USB数据线连接到电脑上，并开启USB调试（关于如何开启USB调试，参见上面的章节）。</p>
+<ol>
+<li>运行adb reverse tcp:8081 tcp:8081</li>
+<li>不需要更多配置，你就可以使用Reload JS和其它的开发选项了。</li>
+</ol>
+<h3 id="Android-5-0以下-通过Wi-Fi连接你的本地开发服务器"><a href="#Android-5-0以下-通过Wi-Fi连接你的本地开发服务器" class="headerlink" title="(Android 5.0以下)通过Wi-Fi连接你的本地开发服务器"></a>(Android 5.0以下)通过Wi-Fi连接你的本地开发服务器</h3><ol>
+<li>首先确保你的电脑和手机设备在同一个Wi-Fi环境下。</li>
+<li>在设备上运行你的React Native应用。和打开其它App一样操作。</li>
+<li>你应该会看到一个“红屏”错误提示。这是正常的，下面的步骤会解决这个报错。</li>
+<li>摇晃设备，或者运行adb shell input keyevent 82，可以打开开发者菜单。</li>
+<li>点击进入Dev Settings。</li>
+<li>点击Debug server host for device。</li>
+<li>输入你电脑的IP地址和端口号（譬如10.0.1.1:8081）。在Mac上，你可以在系统设置/网络里找查询你的IP地址。在Windows上，打开命令提示符并输入ipconfig来查询你的IP地址。在Linux上你可以在终端中输入ifconfig来查询你的IP地址。</li>
+<li>回到开发者菜单然后选择Reload JS。</li>
+</ol>
+<h3 id="生成最终的apk"><a href="#生成最终的apk" class="headerlink" title="生成最终的apk"></a>生成最终的apk</h3><p>这里会把js文件打到项目assets里面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> android &amp;&amp; ./gradlew assembleRelease</div><div class="line"></div><div class="line"></div><div class="line">unzip <span class="_">-l</span>  app/build/outputs/apk/app-release-unsigned.apk </div><div class="line">assets/index.android.bundle</div></pre></td></tr></table></figure>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><ul>
+<li><a href="http://reactnative.cn/docs/0.31/running-on-device-android.html#content" target="_blank" rel="external">在设备上运行</a></li>
+<li><a href="http://reactnative.cn/docs/0.31/signed-apk-android.html#content" target="_blank" rel="external">生成已签名的APK</a></li>
+<li><a href="http://reactnative.cn/docs/0.31/android-building-from-source.html#content" target="_blank" rel="external">从源代码编译React Native</a></li>
+</ul>
+
+          
         
       
     </div>
@@ -1287,8 +1273,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/01/busybox-install/" itemprop="url">
-                  Android6.0 userdebug版安装busybox
+                <a class="post-title-link" href="/2016/09/13/ThreadPoolExecutor-use/" itemprop="url">
+                  ThreadPoolExecutor使用说明
                 </a>
               
             
@@ -1301,8 +1287,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T00:12:21+08:00" content="2016-08-01">
-              2016-08-01
+            <time itemprop="dateCreated" datetime="2016-09-13T16:46:12+08:00" content="2016-09-13">
+              2016-09-13
             </time>
           </span>
 
@@ -1312,8 +1298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/01/busybox-install/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/busybox-install/" itemprop="commentsCount"></span>
+                <a href="/2016/09/13/ThreadPoolExecutor-use/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/ThreadPoolExecutor-use/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1323,7 +1309,7 @@
 
           
           
-             <span id="/2016/08/01/busybox-install/" class="leancloud_visitors" data-flag-title="Android6.0 userdebug版安装busybox">
+             <span id="/2016/09/13/ThreadPoolExecutor-use/" class="leancloud_visitors" data-flag-title="ThreadPoolExecutor使用说明">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1346,10 +1332,128 @@
 
       
         
-          <h1 id="下载对应版本的busybox"><a href="#下载对应版本的busybox" class="headerlink" title="下载对应版本的busybox"></a>下载对应版本的busybox</h1><p><a href="https://busybox.net/downloads/binaries/">下载地址</a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>
+          
+            <h3 id="重点讲解："><a href="#重点讲解：" class="headerlink" title="重点讲解："></a>重点讲解：</h3><p>其中比较容易让人误解的是：corePoolSize，maximumPoolSize，workQueue之间关系。 </p>
+<ul>
+<li>当线程池小于corePoolSize时，新提交任务将创建一个新线程执行任务，即使此时线程池中存在空闲线程。 </li>
+<li>当线程池达到corePoolSize时，新提交任务将被放入workQueue中，等待线程池中任务调度执行 </li>
+<li>当workQueue已满，且maximumPoolSize&gt;corePoolSize时，新提交任务会创建新线程执行任务 </li>
+<li>当提交任务数超过maximumPoolSize时，新提交任务由RejectedExecutionHandler处理 </li>
+<li>当线程池中超过corePoolSize线程，空闲时间达到keepAliveTime时，关闭空闲线程 </li>
+<li>当设置allowCoreThreadTimeOut(true)时，线程池中corePoolSize线程空闲时间达到keepAliveTime也将关闭 </li>
+</ul>
+<p>参考文章：<a href="http://langgufu.iteye.com/blog/2184915" target="_blank" rel="external">JAVA进阶—-ThreadPoolExecutor机制（转载）</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/13/synchronized/" itemprop="url">
+                  synchronized
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T15:09:01+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/13/synchronized/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/synchronized/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/13/synchronized/" class="leancloud_visitors" data-flag-title="synchronized">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="synchronized-方法锁住的是this对象，下面2段代码效果一样"><a href="#synchronized-方法锁住的是this对象，下面2段代码效果一样" class="headerlink" title="synchronized 方法锁住的是this对象，下面2段代码效果一样"></a>synchronized 方法锁住的是this对象，下面2段代码效果一样</h3>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/busybox-install/#more" rel="contents">
+            <a class="btn" href="/2016/09/13/synchronized/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1383,7 +1487,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1424,7 +1528,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1434,7 +1538,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1480,7 +1584,7 @@ PV: 10000<span id="busuanzi_value_site_pv"></span>
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

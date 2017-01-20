@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="需求
+做一系列属性动画，然后把它们循环的播放。于是在onAnimationEnd的时候，执行AnimatorSet的start方法。
+提供一个stop的接口，供暂停动画，恢复到第一帧的状态
+
+问题点击stop的时候，有一定的概率第一帧的元素位置都不对。代码如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nineold_循环动画的bug">
+<meta property="og:url" content="http://android.xieq29.com/2017/01/04/nineold-循环动画的bug/index.html">
+<meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="需求
+做一系列属性动画，然后把它们循环的播放。于是在onAnimationEnd的时候，执行AnimatorSet的start方法。
+提供一个stop的接口，供暂停动画，恢复到第一帧的状态
+
+问题点击stop的时候，有一定的概率第一帧的元素位置都不对。代码如下">
+<meta property="og:updated_time" content="2017-01-04T16:01:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nineold_循环动画的bug">
+<meta name="twitter:description" content="需求
+做一系列属性动画，然后把它们循环的播放。于是在onAnimationEnd的时候，执行AnimatorSet的start方法。
+提供一个stop的接口，供暂停动画，恢复到第一帧的状态
+
+问题点击stop的时候，有一定的概率第一帧的元素位置都不对。代码如下">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://android.xieq29.com/2017/01/04/nineold-循环动画的bug/"/>
+
+  <title> nineold_循环动画的bug | geelong's home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a3fc0be93839d38b2b158b4b1e742f40";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">geelong's home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            目录
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '9sa3jUBxD7BXPsuhmg8a','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                nineold_循环动画的bug
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T23:45:23+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/04/nineold-循环动画的bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/nineold-循环动画的bug/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/04/nineold-循环动画的bug/" class="leancloud_visitors" data-flag-title="nineold_循环动画的bug">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>做一系列属性动画，然后把它们循环的播放。于是在onAnimationEnd的时候，执行AnimatorSet的start方法。</li>
+<li>提供一个stop的接口，供暂停动画，恢复到第一帧的状态</li>
+</ul>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>点击stop的时候，有一定的概率第一帧的元素位置都不对。代码如下</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadingLayout</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> AnimatorSet animatorAll;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadingLayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadingLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadingLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LinearLayout feedLoadingFrame1;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1InRect;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1InLine1;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1InLine2;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1InLine3;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1Line1;</div><div class="line">    <span class="keyword">private</span> View feedLoadingFrame1Line2;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</div><div class="line">        LayoutInflater.from(getContext()).inflate(R.layout.layout_feed_loading, <span class="keyword">this</span>);</div><div class="line"></div><div class="line"></div><div class="line">        feedLoadingFrame1 = (LinearLayout) findViewById(R.id.feed_loading_frame1);</div><div class="line">        feedLoadingFrame1InRect = (View) findViewById(R.id.feed_loading_frame1_in_rect);</div><div class="line">        feedLoadingFrame1InLine1 = (View) findViewById(R.id.feed_loading_frame1_in_line1);</div><div class="line">        feedLoadingFrame1InLine2 = (View) findViewById(R.id.feed_loading_frame1_in_line2);</div><div class="line">        feedLoadingFrame1InLine3 = (View) findViewById(R.id.feed_loading_frame1_in_line3);</div><div class="line">        feedLoadingFrame1Line1 = (View) findViewById(R.id.feed_loading_frame1_line1);</div><div class="line">        feedLoadingFrame1Line2 = (View) findViewById(R.id.feed_loading_frame1_line2);</div><div class="line"></div><div class="line"><span class="comment">//        post(new Runnable() &#123;</span></div><div class="line"><span class="comment">//            @Override</span></div><div class="line"><span class="comment">//            public void run() &#123;</span></div><div class="line"><span class="comment">//                postDelayed(new Runnable() &#123;</span></div><div class="line"><span class="comment">//                    @Override</span></div><div class="line"><span class="comment">//                    public void run() &#123;</span></div><div class="line"><span class="comment">//                     start();</span></div><div class="line"><span class="comment">//                    &#125;</span></div><div class="line"><span class="comment">//                &#125;, 2000);</span></div><div class="line"><span class="comment">//            &#125;</span></div><div class="line"><span class="comment">//        &#125;);</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> AnimatorSet <span class="title">frame</span><span class="params">(View... views)</span> </span>&#123;</div><div class="line">        AnimatorSet inAnimatorSet = createAnimatorSet(<span class="keyword">true</span>, views);</div><div class="line">        AnimatorSet outAnimatorSet = createAnimatorSet(<span class="keyword">false</span>, views);</div><div class="line">        outAnimatorSet.setStartDelay(FRAME_INTERNAL);</div><div class="line"></div><div class="line">        <span class="keyword">final</span> AnimatorSet animatorFrame = <span class="keyword">new</span> AnimatorSet();</div><div class="line">        animatorFrame.playSequentially(inAnimatorSet, outAnimatorSet);</div><div class="line">        <span class="keyword">return</span> animatorFrame;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> AnimatorSet <span class="title">firstFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">        AnimatorSet outAnimatorSet = createAnimatorSet(<span class="keyword">false</span>,</div><div class="line">                feedLoadingFrame1Line2, feedLoadingFrame1Line1,</div><div class="line">                feedLoadingFrame1InRect,</div><div class="line">                feedLoadingFrame1InLine3, feedLoadingFrame1InLine2, feedLoadingFrame1InLine1);</div><div class="line">        <span class="keyword">return</span> outAnimatorSet;</div><div class="line"><span class="comment">//        return frame(</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame1_1),</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame1_2));</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">//    private AnimatorSet secondFrame()&#123;</span></div><div class="line"><span class="comment">//        return frame(</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame2_1),</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame2_2),</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame2_3),</span></div><div class="line"><span class="comment">//                findViewById(R.id.feed_loading_frame2_4));</span></div><div class="line"><span class="comment">//    &#125;</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRunning</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> animatorAll != <span class="keyword">null</span> &amp;&amp; animatorAll.isRunning();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (isRunning()) &#123;</div><div class="line">            animatorAll.end();</div><div class="line">        &#125;</div><div class="line">        resetTranslationY(feedLoadingFrame1Line2, feedLoadingFrame1Line1,</div><div class="line">                feedLoadingFrame1InRect,</div><div class="line">                feedLoadingFrame1InLine3, feedLoadingFrame1InLine2, feedLoadingFrame1InLine1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resetTranslationY</span><span class="params">(View... views)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (View view : views) &#123;</div><div class="line">            ViewHelper.setTranslationY(view, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line">        stop();</div><div class="line">        animatorAll = <span class="keyword">new</span> AnimatorSet();</div><div class="line"><span class="comment">//        animatorAll.playSequentially(firstFrame(), secondFrame());</span></div><div class="line">        animatorAll.playSequentially(firstFrame());</div><div class="line"></div><div class="line">        animatorAll.addListener(<span class="keyword">new</span> Animator.AnimatorListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line">                animatorAll.setupStartValues();</div><div class="line">                animatorAll.start();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        animatorAll.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DURATION = <span class="number">300</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ITEM_INTERNAL = <span class="number">100</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FRAME_INTERNAL = <span class="number">500</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> AnimatorSet <span class="title">createAnimatorSet</span><span class="params">(<span class="keyword">boolean</span> inOrOut, View... views)</span> </span>&#123;</div><div class="line">        AnimatorSet animatorSet = <span class="keyword">new</span> AnimatorSet();</div><div class="line">        List&lt;Animator&gt; animatorList = <span class="keyword">new</span> LinkedList&lt;&gt;();</div><div class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (View view : views) &#123;</div><div class="line">            Animator animator = inOrOut ? createInAnimator(view) : createOutAnimator(view);</div><div class="line">            animator.setDuration(DURATION);</div><div class="line">            animator.setStartDelay(ITEM_INTERNAL * index);</div><div class="line">            animatorList.add(animator);</div><div class="line">            index++;</div><div class="line">        &#125;</div><div class="line">        animatorSet.playTogether(animatorList);</div><div class="line">        <span class="keyword">return</span> animatorSet;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Animator <span class="title">createInAnimator</span><span class="params">(<span class="keyword">final</span> View view)</span> </span>&#123;</div><div class="line">        view.setVisibility(View.INVISIBLE);</div><div class="line">        Animator animator = ObjectAnimator.ofFloat(view, <span class="string">"translationY"</span>, -getScrollRange(), <span class="number">0</span>);</div><div class="line">        animator.addListener(<span class="keyword">new</span> Animator.AnimatorListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line">                view.setVisibility(View.VISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">return</span> animator;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Animator <span class="title">createOutAnimator</span><span class="params">(<span class="keyword">final</span> View view)</span> </span>&#123;</div><div class="line">        Animator animator = ObjectAnimator.ofFloat(view, <span class="string">"translationY"</span>, <span class="number">0</span>, getScrollRange());</div><div class="line">        animator.addListener(<span class="keyword">new</span> Animator.AnimatorListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line">                view.setVisibility(View.INVISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">return</span> animator;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getScrollRange</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getMeasuredHeight();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="步骤分析"><a href="#步骤分析" class="headerlink" title="步骤分析"></a>步骤分析</h3><ol>
+<li>在listener的onAnimationEnd方法里调用start,开启下一次动画</li>
+<li>AnimatorSet的onAnimationEnd方法后，把mStarted设置为false</li>
+<li>调用AnimatorSet的end,由于mStarted为false，所以不会真正停止正在执行的动画</li>
+<li>由于调用了end方法，mTerminated 被设置为 true，所以这次的动画执行完后，不会执行回调函数</li>
+<li>最终导致在调用stop方法时恢复的坐标，都被执行的动画覆盖了</li>
+<li>即使在listener的onAnimationEnd方法里判断动画已经停止了，重新恢复坐标也没用，因为最后一次的回调不会执行</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">AnimatorSet.<span class="function">java</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> &#123;</div><div class="line">    animation.removeListener(<span class="keyword">this</span>);</div><div class="line">    mPlayingSet.remove(animation);</div><div class="line">    Node animNode = mAnimatorSet.mNodeMap.get(animation);</div><div class="line">    animNode.done = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">if</span> (!mTerminated) &#123;</div><div class="line">        <span class="comment">// Listeners are already notified of the AnimatorSet ending in cancel() or</span></div><div class="line">        <span class="comment">// end(); the logic below only kicks in when animations end normally</span></div><div class="line">        ArrayList&lt;Node&gt; sortedNodes = mAnimatorSet.mSortedNodes;</div><div class="line">        <span class="keyword">boolean</span> allDone = <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">int</span> numSortedNodes = sortedNodes.size();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numSortedNodes; ++i) &#123;</div><div class="line">            <span class="keyword">if</span> (!sortedNodes.get(i).done) &#123;</div><div class="line">                allDone = <span class="keyword">false</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (allDone) &#123;</div><div class="line">            <span class="comment">// If this was the last child animation to end, then notify listeners that this</span></div><div class="line">            <span class="comment">// AnimatorSet has ended</span></div><div class="line">            <span class="keyword">if</span> (mListeners != <span class="keyword">null</span>) &#123;</div><div class="line">                ArrayList&lt;AnimatorListener&gt; tmpListeners =</div><div class="line">                        (ArrayList&lt;AnimatorListener&gt;) mListeners.clone();</div><div class="line">                <span class="keyword">int</span> numListeners = tmpListeners.size();</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numListeners; ++i) &#123;</div><div class="line">                    tmpListeners.get(i).onAnimationEnd(mAnimatorSet);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            mAnimatorSet.mStarted = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">end</span><span class="params">()</span> </span>&#123;</div><div class="line">    mTerminated = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">if</span> (isStarted()) &#123;</div><div class="line">        <span class="keyword">if</span> (mSortedNodes.size() != mNodes.size()) &#123;</div><div class="line">            <span class="comment">// hasn't been started yet - sort the nodes now, then end them</span></div><div class="line">            sortNodes();</div><div class="line">            <span class="keyword">for</span> (Node node : mSortedNodes) &#123;</div><div class="line">                <span class="keyword">if</span> (mSetListener == <span class="keyword">null</span>) &#123;</div><div class="line">                    mSetListener = <span class="keyword">new</span> AnimatorSetListener(<span class="keyword">this</span>);</div><div class="line">                &#125;</div><div class="line">                node.animation.addListener(mSetListener);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mDelayAnim != <span class="keyword">null</span>) &#123;</div><div class="line">            mDelayAnim.cancel();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mSortedNodes.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">for</span> (Node node : mSortedNodes) &#123;</div><div class="line">                node.animation.end();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mListeners != <span class="keyword">null</span>) &#123;</div><div class="line">            ArrayList&lt;AnimatorListener&gt; tmpListeners =</div><div class="line">                    (ArrayList&lt;AnimatorListener&gt;) mListeners.clone();</div><div class="line">            <span class="keyword">for</span> (AnimatorListener listener : tmpListeners) &#123;</div><div class="line">                listener.onAnimationEnd(<span class="keyword">this</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        mStarted = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>在listener的onAnimationEnd方法里通过handler post一下再重新开启下一次动画</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/21/aosp结构说明/" rel="next" title="aosp结构说明">
+                <i class="fa fa-chevron-left"></i> aosp结构说明
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/07/event_log/" rel="prev" title="event_log">
+                event_log <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/04/nineold-循环动画的bug/"
+           data-title="nineold_循环动画的bug" data-url="http://android.xieq29.com/2017/01/04/nineold-循环动画的bug/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="geelong" />
+          <p class="site-author-name" itemprop="name">geelong</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤分析"><span class="nav-number">3.</span> <span class="nav-text">步骤分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">4.</span> <span class="nav-text">解决方法</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+PV: 10000<span id="busuanzi_value_site_pv"></span>
+<span id="busuanzi_container_site_uv">
+  UV: 10000<span id="busuanzi_value_site_uv"></span>
+</span>
+</span>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">geelong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+<br/>
+
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"geelong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Lz0Dmy705eNyXrN8c65fUxJY-gzGzoHsz", "OKHs59WSOKyKuFQamDxNyAhh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

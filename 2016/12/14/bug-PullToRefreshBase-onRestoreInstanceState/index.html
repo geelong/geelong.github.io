@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="错误堆栈如下
+123456789101112131415Caused by: java.lang.IllegalArgumentException: Wrong state class, expecting View State but received class android.support.v7.widget.RecyclerView$SavedState instead. This us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bug_PullToRefreshBase.onRestoreInstanceState">
+<meta property="og:url" content="http://android.xieq29.com/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/index.html">
+<meta property="og:site_name" content="geelong's home">
+<meta property="og:description" content="错误堆栈如下
+123456789101112131415Caused by: java.lang.IllegalArgumentException: Wrong state class, expecting View State but received class android.support.v7.widget.RecyclerView$SavedState instead. This us">
+<meta property="og:updated_time" content="2016-12-14T12:06:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bug_PullToRefreshBase.onRestoreInstanceState">
+<meta name="twitter:description" content="错误堆栈如下
+123456789101112131415Caused by: java.lang.IllegalArgumentException: Wrong state class, expecting View State but received class android.support.v7.widget.RecyclerView$SavedState instead. This us">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://android.xieq29.com/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/"/>
+
+  <title> bug_PullToRefreshBase.onRestoreInstanceState | geelong's home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a3fc0be93839d38b2b158b4b1e742f40";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">geelong's home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            目录
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '9sa3jUBxD7BXPsuhmg8a','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                bug_PullToRefreshBase.onRestoreInstanceState
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-14T19:50:09+08:00" content="2016-12-14">
+              2016-12-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/" class="leancloud_visitors" data-flag-title="bug_PullToRefreshBase.onRestoreInstanceState">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>错误堆栈如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Caused by: java.lang.IllegalArgumentException: Wrong state class, expecting View State but received class android.support.v7.widget.RecyclerView$SavedState instead. This usually happens when two views of different type have the same id in the same hierarchy. This view's id is id/test_recycler_view. Make sure other views do not use the same id.</div><div class="line">	at android.view.View.onRestoreInstanceState(View.java:13978)</div><div class="line">	at com.test.pullrefreshview.PullToRefreshBase.onRestoreInstanceState(PullToRefreshBase.java:880)</div><div class="line">	at android.view.View.dispatchRestoreInstanceState(View.java:13954)</div><div class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3025)</div><div class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3031)</div><div class="line">	at android.view.View.restoreHierarchyState(View.java:13932)</div><div class="line">	at android.support.v4.app.Fragment.restoreViewState(Fragment.java:465)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1094)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1252)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1234)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.dispatchActivityCreated(FragmentManager.java:2046)</div><div class="line">	at android.support.v4.app.FragmentController.dispatchActivityCreated(FragmentController.java:174)</div><div class="line">	at android.support.v4.app.FragmentActivity.onStart(FragmentActivity.java:597)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>报错的代码</p>
+<p>api 19 View.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Parcelable state)</span> </span>&#123;</div><div class="line">    mPrivateFlags |= PFLAG_SAVE_STATE_CALLED;</div><div class="line">    <span class="keyword">if</span> (state != BaseSavedState.EMPTY_STATE &amp;&amp; state != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Wrong state class, expecting View State but "</span></div><div class="line">                + <span class="string">"received "</span> + state.getClass().toString() + <span class="string">" instead. This usually happens "</span></div><div class="line">                + <span class="string">"when two views of different type have the same id in the same hierarchy. "</span></div><div class="line">                + <span class="string">"This view's id is "</span> + ViewDebug.resolveId(mContext, getId()) + <span class="string">". Make sure "</span></div><div class="line">                + <span class="string">"other views do not use the same id."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>PullToRefreshBase.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Parcelable state)</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (state <span class="keyword">instanceof</span> Bundle) &#123;</div><div class="line">          Bundle bundle = (Bundle) state;</div><div class="line"></div><div class="line">          setMode(Mode.mapIntToValue(bundle.getInt(STATE_MODE, <span class="number">0</span>)));</div><div class="line">          mCurrentMode = Mode.mapIntToValue(bundle.getInt(STATE_CURRENT_MODE, <span class="number">0</span>));</div><div class="line"></div><div class="line">          mScrollingWhileRefreshingEnabled = bundle.getBoolean(STATE_SCROLLING_REFRESHING_ENABLED, <span class="keyword">false</span>);</div><div class="line">          mShowViewWhileRefreshing = bundle.getBoolean(STATE_SHOW_REFRESHING_VIEW, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">          <span class="comment">// Let super Restore Itself</span></div><div class="line">          <span class="keyword">super</span>.onRestoreInstanceState(bundle.getParcelable(STATE_SUPER));</div><div class="line"></div><div class="line">          <span class="comment">// State viewState = State.mapIntToValue(bundle.getInt(STATE_STATE, 0));</span></div><div class="line">          <span class="comment">// if (viewState == State.REFRESHING || viewState == State.MANUAL_REFRESHING) &#123;</span></div><div class="line">          <span class="comment">// setIntegrity(viewState, true);</span></div><div class="line">          <span class="comment">// &#125;</span></div><div class="line"></div><div class="line">          <span class="comment">// Now let derivative classes restore their state</span></div><div class="line">          onPtrRestoreInstanceState(bundle);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">super</span>.onRestoreInstanceState(state);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> Parcelable <span class="title">onSaveInstanceState</span><span class="params">()</span> </span>&#123;</div><div class="line">      Bundle bundle = <span class="keyword">new</span> Bundle();</div><div class="line"></div><div class="line">      <span class="comment">// Let derivative classes get a chance to save state first, that way we</span></div><div class="line">      <span class="comment">// can make sure they don't overrite any of our values</span></div><div class="line">      onPtrSaveInstanceState(bundle);</div><div class="line"></div><div class="line">      bundle.putInt(STATE_STATE, mState.getIntValue());</div><div class="line">      bundle.putInt(STATE_MODE, mMode.getIntValue());</div><div class="line">      bundle.putInt(STATE_CURRENT_MODE, mCurrentMode.getIntValue());</div><div class="line">      bundle.putBoolean(STATE_SCROLLING_REFRESHING_ENABLED, mScrollingWhileRefreshingEnabled);</div><div class="line">      bundle.putBoolean(STATE_SHOW_REFRESHING_VIEW, mShowViewWhileRefreshing);</div><div class="line">      bundle.putParcelable(STATE_SUPER, <span class="keyword">super</span>.onSaveInstanceState());</div><div class="line"></div><div class="line">      <span class="keyword">return</span> bundle;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><ul>
+<li>最开始通过id搜索发现并没有重复使用该id</li>
+<li>后来想到通过uiautomator查看，发现确实存在了重复id</li>
+<li>重复原因如下，新建的类传入了当前类的attrs，所以id和当前类相同</li>
+<li>解决办法就是设置一个新的id就好了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> @Override</div><div class="line">    protected RecyclerView createRefreshableView(Context context, AttributeSet attrs) &#123;</div><div class="line">        RecyclerView recyclerView = null;</div><div class="line">        recyclerView = new RecyclerView(context, attrs);</div><div class="line"></div><div class="line">//        需要设置一个新的id,否则id会和当前类相同，导致页面被回收再恢复后抛出异常</div><div class="line">//        recyclerView.setId(android.R.id.list);</div><div class="line">        return recyclerView;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li>Activity回收前，通过onSaveInstance告知View存储自己的状态</li>
+<li>ViewGroup先存储自己的状态，以id为key存起来</li>
+<li>ViewGroup的子View储自己的状态，以id为key存起来</li>
+<li>所以id相同的时候，子View的状态把之前的状态覆盖掉了</li>
+<li>恢复的时候，父View用id取状态，取出了子View的状态，类型不对。所以抛出异常</li>
+</ul>
+<p>ViewGrop.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchSaveInstanceState</span><span class="params">(SparseArray&lt;Parcelable&gt; container)</span> </span>&#123;</div><div class="line">       <span class="keyword">super</span>.dispatchSaveInstanceState(container);</div><div class="line">       <span class="keyword">final</span> <span class="keyword">int</span> count = mChildrenCount;</div><div class="line">       <span class="keyword">final</span> View[] children = mChildren;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">           View c = children[i];</div><div class="line">           <span class="keyword">if</span> ((c.mViewFlags &amp; PARENT_SAVE_DISABLED_MASK) != PARENT_SAVE_DISABLED) &#123;</div><div class="line">               c.dispatchSaveInstanceState(container);</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">       <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchRestoreInstanceState</span><span class="params">(SparseArray&lt;Parcelable&gt; container)</span> </span>&#123;</div><div class="line">       <span class="keyword">super</span>.dispatchRestoreInstanceState(container);</div><div class="line">       <span class="keyword">final</span> <span class="keyword">int</span> count = mChildrenCount;</div><div class="line">       <span class="keyword">final</span> View[] children = mChildren;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">           View c = children[i];</div><div class="line">           <span class="keyword">if</span> ((c.mViewFlags &amp; PARENT_SAVE_DISABLED_MASK) != PARENT_SAVE_DISABLED) &#123;</div><div class="line">               c.dispatchRestoreInstanceState(container);</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>View.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchSaveInstanceState</span><span class="params">(SparseArray&lt;Parcelable&gt; container)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mID != NO_ID &amp;&amp; (mViewFlags &amp; SAVE_DISABLED_MASK) == <span class="number">0</span>) &#123;</div><div class="line">        mPrivateFlags &amp;= ~PFLAG_SAVE_STATE_CALLED;</div><div class="line">        Parcelable state = onSaveInstanceState();</div><div class="line">        <span class="keyword">if</span> ((mPrivateFlags &amp; PFLAG_SAVE_STATE_CALLED) == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</div><div class="line">                    <span class="string">"Derived class did not call super.onSaveInstanceState()"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (state != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">// Log.i("View", "Freezing #" + Integer.toHexString(mID)</span></div><div class="line">            <span class="comment">// + ": " + state);</span></div><div class="line">            container.put(mID, state);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchRestoreInstanceState</span><span class="params">(SparseArray&lt;Parcelable&gt; container)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mID != NO_ID) &#123;</div><div class="line">        Parcelable state = container.get(mID);</div><div class="line">        <span class="keyword">if</span> (state != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">// Log.i("View", "Restoreing #" + Integer.toHexString(mID)</span></div><div class="line">            <span class="comment">// + ": " + state);</span></div><div class="line">            mPrivateFlags &amp;= ~PFLAG_SAVE_STATE_CALLED;</div><div class="line">            onRestoreInstanceState(state);</div><div class="line">            <span class="keyword">if</span> ((mPrivateFlags &amp; PFLAG_SAVE_STATE_CALLED) == <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</div><div class="line">                        <span class="string">"Derived class did not call super.onRestoreInstanceState()"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/11/ClassLoader/" rel="next" title="ClassLoader">
+                <i class="fa fa-chevron-left"></i> ClassLoader
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/21/aosp结构说明/" rel="prev" title="aosp结构说明">
+                aosp结构说明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/"
+           data-title="bug_PullToRefreshBase.onRestoreInstanceState" data-url="http://android.xieq29.com/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="geelong" />
+          <p class="site-author-name" itemprop="name">geelong</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">1.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">1.1.</span> <span class="nav-text">原因</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+PV: 10000<span id="busuanzi_value_site_pv"></span>
+<span id="busuanzi_container_site_uv">
+  UV: 10000<span id="busuanzi_value_site_uv"></span>
+</span>
+</span>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">geelong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+<br/>
+
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"geelong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Lz0Dmy705eNyXrN8c65fUxJY-gzGzoHsz", "OKHs59WSOKyKuFQamDxNyAhh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

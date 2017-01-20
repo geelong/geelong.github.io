@@ -267,8 +267,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/26/adb-am-start-uri丢参数的问题/" itemprop="url">
-                  adb am start uri丢参数的问题
+                <a class="post-title-link" href="/2017/01/20/nineold的一个bug/" itemprop="url">
+                  nineold的一个bug
                 </a>
               
             
@@ -281,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T23:14:32+08:00" content="2016-10-26">
-              2016-10-26
+            <time itemprop="dateCreated" datetime="2017-01-20T18:44:06+08:00" content="2017-01-20">
+              2017-01-20
             </time>
           </span>
 
@@ -292,8 +292,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/26/adb-am-start-uri丢参数的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/adb-am-start-uri丢参数的问题/" itemprop="commentsCount"></span>
+                <a href="/2017/01/20/nineold的一个bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/20/nineold的一个bug/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -303,7 +303,7 @@
 
           
           
-             <span id="/2016/10/26/adb-am-start-uri丢参数的问题/" class="leancloud_visitors" data-flag-title="adb am start uri丢参数的问题">
+             <span id="/2017/01/20/nineold的一个bug/" class="leancloud_visitors" data-flag-title="nineold的一个bug">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -326,9 +326,9 @@
 
       
         
-          <p>adb shell am start uri会丢掉第二个后面的所有参数，需要在&amp;前加\转义，并使用下面的方式打开</p>
+          <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>发现nineold的一个bug,但是无法定位是那块业务的问题</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/adb-am-start-uri丢参数的问题/#more" rel="contents">
+            <a class="btn" href="/2017/01/20/nineold的一个bug/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -379,8 +379,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/26/Activity启动参数的封装/" itemprop="url">
-                  Activity启动参数的封装
+                <a class="post-title-link" href="/2017/01/20/静态代理和动态代理/" itemprop="url">
+                  静态代理和动态代理
                 </a>
               
             
@@ -393,8 +393,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T23:09:14+08:00" content="2016-10-26">
-              2016-10-26
+            <time itemprop="dateCreated" datetime="2017-01-20T18:32:28+08:00" content="2017-01-20">
+              2017-01-20
             </time>
           </span>
 
@@ -404,8 +404,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/26/Activity启动参数的封装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/Activity启动参数的封装/" itemprop="commentsCount"></span>
+                <a href="/2017/01/20/静态代理和动态代理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/20/静态代理和动态代理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -415,7 +415,7 @@
 
           
           
-             <span id="/2016/10/26/Activity启动参数的封装/" class="leancloud_visitors" data-flag-title="Activity启动参数的封装">
+             <span id="/2017/01/20/静态代理和动态代理/" class="leancloud_visitors" data-flag-title="静态代理和动态代理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -438,9 +438,11 @@
 
       
         
-          <p>给activity传参比较繁琐，有的直接在调用处构造intent，然后传参。但是这种方式不够内聚，删除参数的时候到处都需要改动，打开页面写相关代码也费时，容易漏参数。下面讨论几种传参数的方法</p>
+          <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>获取数据的时候显示一个动画，数据回来后，显示数据</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>动画还没显示，数据就回来了，需要做个判断，在数据回来的时候，如果时间太短，则延迟一下再显示</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>对callback里所有方法包装一下，加入时间判断功能。不在原来的callback实现里直接修改是符合开闭原则的。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/Activity启动参数的封装/#more" rel="contents">
+            <a class="btn" href="/2017/01/20/静态代理和动态代理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -491,8 +493,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/21/gradle常用task/" itemprop="url">
-                  gradle常用task
+                <a class="post-title-link" href="/2017/01/12/dynamic-proxy/" itemprop="url">
+                  动态代理使用
                 </a>
               
             
@@ -505,8 +507,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-21T11:44:16+08:00" content="2016-09-21">
-              2016-09-21
+            <time itemprop="dateCreated" datetime="2017-01-12T22:41:05+08:00" content="2017-01-12">
+              2017-01-12
             </time>
           </span>
 
@@ -516,8 +518,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/21/gradle常用task/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/gradle常用task/" itemprop="commentsCount"></span>
+                <a href="/2017/01/12/dynamic-proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/12/dynamic-proxy/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -527,7 +529,7 @@
 
           
           
-             <span id="/2016/09/21/gradle常用task/" class="leancloud_visitors" data-flag-title="gradle常用task">
+             <span id="/2017/01/12/dynamic-proxy/" class="leancloud_visitors" data-flag-title="动态代理使用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -550,12 +552,12 @@
 
       
         
-          
-            <p>查看具体task帮助<br><code>./gradlew help --task  app.home:dependencies</code></p>
-<p>查看某个task的依赖</p>
-<p><code>./gradlew help --task  app.home:dependencies --configuration compile</code></p>
-
-          
+          <h3 id="写一个存储模块，接口如下，测试的时候需要计算存储的耗时"><a href="#写一个存储模块，接口如下，测试的时候需要计算存储的耗时" class="headerlink" title="写一个存储模块，接口如下，测试的时候需要计算存储的耗时"></a>写一个存储模块，接口如下，测试的时候需要计算存储的耗时</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IStore</span> </span>&#123;</div><div class="line"></div><div class="line">       <span class="function"><span class="keyword">boolean</span> <span class="title">save</span><span class="params">(String key, String val)</span></span>;</div><div class="line"></div><div class="line">       <span class="function">String <span class="title">get</span><span class="params">(String key)</span></span>;</div><div class="line"></div><div class="line">       <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(String key)</span></span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/12/dynamic-proxy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -603,8 +605,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/14/RN-started/" itemprop="url">
-                  RN_started
+                <a class="post-title-link" href="/2017/01/07/anr/" itemprop="url">
+                  anr
                 </a>
               
             
@@ -617,8 +619,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T12:10:33+08:00" content="2016-09-14">
-              2016-09-14
+            <time itemprop="dateCreated" datetime="2017-01-07T11:46:01+08:00" content="2017-01-07">
+              2017-01-07
             </time>
           </span>
 
@@ -628,8 +630,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/14/RN-started/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/RN-started/" itemprop="commentsCount"></span>
+                <a href="/2017/01/07/anr/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/07/anr/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -639,7 +641,7 @@
 
           
           
-             <span id="/2016/09/14/RN-started/" class="leancloud_visitors" data-flag-title="RN_started">
+             <span id="/2017/01/07/anr/" class="leancloud_visitors" data-flag-title="anr">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -663,30 +665,46 @@
       
         
           
-            <h3 id="hello-world新建和运行"><a href="#hello-world新建和运行" class="headerlink" title="hello world新建和运行"></a>hello world新建和运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">react-native init AwesomeProject</div><div class="line"><span class="built_in">cd</span> AwesomeProject</div><div class="line">react-native run-android</div></pre></td></tr></table></figure>
-<h3 id="开发的时候是从下面地址下载了js"><a href="#开发的时候是从下面地址下载了js" class="headerlink" title="开发的时候是从下面地址下载了js"></a>开发的时候是从下面地址下载了js</h3><p><a href="http://localhost:8081/index.android.bundle?platform=android&amp;dev=true&amp;hot=false&amp;minify=false" target="_blank" rel="external">http://localhost:8081/index.android.bundle?platform=android&amp;dev=true&amp;hot=false&amp;minify=false</a></p>
-<p>也可以保存这个文件放到APP上，app直接加载这个文件，就不用开服务器了</p>
-<h3 id="Android-5-0及以上-使用adb-reverse命令"><a href="#Android-5-0及以上-使用adb-reverse命令" class="headerlink" title="(Android 5.0及以上)使用adb reverse命令"></a>(Android 5.0及以上)使用adb reverse命令</h3><p>注意，这个选项只能在5.0以上版本(API 21+)的安卓设备上使用。<br>首先把你的设备通过USB数据线连接到电脑上，并开启USB调试（关于如何开启USB调试，参见上面的章节）。</p>
-<ol>
-<li>运行adb reverse tcp:8081 tcp:8081</li>
-<li>不需要更多配置，你就可以使用Reload JS和其它的开发选项了。</li>
-</ol>
-<h3 id="Android-5-0以下-通过Wi-Fi连接你的本地开发服务器"><a href="#Android-5-0以下-通过Wi-Fi连接你的本地开发服务器" class="headerlink" title="(Android 5.0以下)通过Wi-Fi连接你的本地开发服务器"></a>(Android 5.0以下)通过Wi-Fi连接你的本地开发服务器</h3><ol>
-<li>首先确保你的电脑和手机设备在同一个Wi-Fi环境下。</li>
-<li>在设备上运行你的React Native应用。和打开其它App一样操作。</li>
-<li>你应该会看到一个“红屏”错误提示。这是正常的，下面的步骤会解决这个报错。</li>
-<li>摇晃设备，或者运行adb shell input keyevent 82，可以打开开发者菜单。</li>
-<li>点击进入Dev Settings。</li>
-<li>点击Debug server host for device。</li>
-<li>输入你电脑的IP地址和端口号（譬如10.0.1.1:8081）。在Mac上，你可以在系统设置/网络里找查询你的IP地址。在Windows上，打开命令提示符并输入ipconfig来查询你的IP地址。在Linux上你可以在终端中输入ifconfig来查询你的IP地址。</li>
-<li>回到开发者菜单然后选择Reload JS。</li>
-</ol>
-<h3 id="生成最终的apk"><a href="#生成最终的apk" class="headerlink" title="生成最终的apk"></a>生成最终的apk</h3><p>这里会把js文件打到项目assets里面</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> android &amp;&amp; ./gradlew assembleRelease</div><div class="line"></div><div class="line"></div><div class="line">unzip <span class="_">-l</span>  app/build/outputs/apk/app-release-unsigned.apk </div><div class="line">assets/index.android.bundle</div></pre></td></tr></table></figure>
-<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><ul>
-<li><a href="http://reactnative.cn/docs/0.31/running-on-device-android.html#content" target="_blank" rel="external">在设备上运行</a></li>
-<li><a href="http://reactnative.cn/docs/0.31/signed-apk-android.html#content" target="_blank" rel="external">生成已签名的APK</a></li>
-<li><a href="http://reactnative.cn/docs/0.31/android-building-from-source.html#content" target="_blank" rel="external">从源代码编译React Native</a></li>
+            <h3 id="android开篇"><a href="#android开篇" class="headerlink" title="android开篇"></a><a href="http://gityuan.com/android/" target="_blank" rel="external">android开篇</a></h3><ul>
+<li>init<ul>
+<li>是所有用户进程的鼻祖</li>
+</ul>
+</li>
+<li>zygote<ul>
+<li>是所有Java进程的父进程</li>
+<li>加载ZygoteInit类，注册Zygote Socket服务端套接字</li>
+<li>加载虚拟机</li>
+<li>preloadClasses</li>
+<li>preloadResouces</li>
+</ul>
+</li>
+<li>system_server<ul>
+<li>Zygote孵化的第一个进程</li>
+<li>负责启动和管理整个Java framework，包含ActivityManager，PowerManager等服务</li>
+</ul>
+</li>
+<li>Media Server进程<ul>
+<li>由init进程fork而来</li>
+<li>负责启动和管理整个C++ framework，包含AudioFlinger，Camera Service，等服务</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h3><ul>
+<li><a href="http://gityuan.com/2016/07/02/android-anr/" target="_blank" rel="external">理解Android ANR的触发情景</a></li>
+<li><a href="http://gityuan.com/2016/12/02/app-not-response/" target="_blank" rel="external">理解Android ANR的处理过程</a></li>
+</ul>
+<hr>
+<h3 id="input系统"><a href="#input系统" class="headerlink" title="input系统"></a>input系统</h3><ul>
+<li><a href="http://gityuan.com/2016/12/10/input-manager/" target="_blank" rel="external">Input系统—启动篇</a><ul>
+<li>./frameworks/native/include/input/InputTransport.h</li>
+</ul>
+</li>
+<li><a href="http://gityuan.com/2016/12/11/input-reader/" target="_blank" rel="external">Input系统—InputReader线程</a></li>
+<li><a href="http://gityuan.com/2016/12/17/input-dispatcher/" target="_blank" rel="external">Input系统—InputDispatcher线程</a></li>
+<li><a href="http://gityuan.com/2016/12/24/input-ui/" target="_blank" rel="external">Input系统—UI线程</a></li>
+<li><a href="http://gityuan.com/2016/12/31/input-ipc/" target="_blank" rel="external">Input系统—进程交互</a></li>
+<li><a href="http://gityuan.com/2017/01/01/input-anr/" target="_blank" rel="external">Input系统—ANR原理分析</a></li>
 </ul>
 
           
@@ -737,8 +755,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/13/ThreadPoolExecutor-use/" itemprop="url">
-                  ThreadPoolExecutor使用说明
+                <a class="post-title-link" href="/2017/01/07/event_log/" itemprop="url">
+                  event_log
                 </a>
               
             
@@ -751,8 +769,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T16:46:12+08:00" content="2016-09-13">
-              2016-09-13
+            <time itemprop="dateCreated" datetime="2017-01-07T11:13:19+08:00" content="2017-01-07">
+              2017-01-07
             </time>
           </span>
 
@@ -762,8 +780,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/13/ThreadPoolExecutor-use/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/ThreadPoolExecutor-use/" itemprop="commentsCount"></span>
+                <a href="/2017/01/07/event_log/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/07/event_log/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -773,7 +791,7 @@
 
           
           
-             <span id="/2016/09/13/ThreadPoolExecutor-use/" class="leancloud_visitors" data-flag-title="ThreadPoolExecutor使用说明">
+             <span id="/2017/01/07/event_log/" class="leancloud_visitors" data-flag-title="event_log">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -797,16 +815,20 @@
       
         
           
-            <h3 id="重点讲解："><a href="#重点讲解：" class="headerlink" title="重点讲解："></a>重点讲解：</h3><p>其中比较容易让人误解的是：corePoolSize，maximumPoolSize，workQueue之间关系。 </p>
+            <p><a href="http://gityuan.com/2016/05/15/event-log/" target="_blank" rel="external">Android EventLog含义</a></p>
+<p>例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">52004 binder_sample (descriptor|3),(method_num|1|5),(time|1|3),(blocking_package|3),(sample_percent|1|6)</div><div class="line">12-30 10:12:51.792 22854 22854 I binder_sample: [android.hardware.input.IInputManager,5,5052,com.android.commands.monkey,100]</div></pre></td></tr></table></figure>
 <ul>
-<li>当线程池小于corePoolSize时，新提交任务将创建一个新线程执行任务，即使此时线程池中存在空闲线程。 </li>
-<li>当线程池达到corePoolSize时，新提交任务将被放入workQueue中，等待线程池中任务调度执行 </li>
-<li>当workQueue已满，且maximumPoolSize&gt;corePoolSize时，新提交任务会创建新线程执行任务 </li>
-<li>当提交任务数超过maximumPoolSize时，新提交任务由RejectedExecutionHandler处理 </li>
-<li>当线程池中超过corePoolSize线程，空闲时间达到keepAliveTime时，关闭空闲线程 </li>
-<li>当设置allowCoreThreadTimeOut(true)时，线程池中corePoolSize线程空闲时间达到keepAliveTime也将关闭 </li>
+<li>blocking_package=com.android.commands.monkey</li>
+<li>descriptor=android.hardware.input.IInputManager</li>
+<li>method_num=5</li>
+<li>time=5052ms</li>
+<li>sample_percent=100</li>
 </ul>
-<p>参考文章：<a href="http://langgufu.iteye.com/blog/2184915" target="_blank" rel="external">JAVA进阶—-ThreadPoolExecutor机制（转载）</a></p>
+<blockquote>
+<p>一个疑问 22854是什么？</p>
+</blockquote>
+<hr>
 
           
         
@@ -856,8 +878,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/13/synchronized/" itemprop="url">
-                  synchronized
+                <a class="post-title-link" href="/2017/01/04/nineold-循环动画的bug/" itemprop="url">
+                  nineold_循环动画的bug
                 </a>
               
             
@@ -870,8 +892,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T15:09:01+08:00" content="2016-09-13">
-              2016-09-13
+            <time itemprop="dateCreated" datetime="2017-01-04T23:45:23+08:00" content="2017-01-04">
+              2017-01-04
             </time>
           </span>
 
@@ -881,8 +903,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/13/synchronized/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/synchronized/" itemprop="commentsCount"></span>
+                <a href="/2017/01/04/nineold-循环动画的bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/nineold-循环动画的bug/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -892,7 +914,7 @@
 
           
           
-             <span id="/2016/09/13/synchronized/" class="leancloud_visitors" data-flag-title="synchronized">
+             <span id="/2017/01/04/nineold-循环动画的bug/" class="leancloud_visitors" data-flag-title="nineold_循环动画的bug">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -915,9 +937,13 @@
 
       
         
-          <h3 id="synchronized-方法锁住的是this对象，下面2段代码效果一样"><a href="#synchronized-方法锁住的是this对象，下面2段代码效果一样" class="headerlink" title="synchronized 方法锁住的是this对象，下面2段代码效果一样"></a>synchronized 方法锁住的是this对象，下面2段代码效果一样</h3>
+          <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>做一系列属性动画，然后把它们循环的播放。于是在onAnimationEnd的时候，执行AnimatorSet的start方法。</li>
+<li>提供一个stop的接口，供暂停动画，恢复到第一帧的状态</li>
+</ul>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>点击stop的时候，有一定的概率第一帧的元素位置都不对。代码如下</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/13/synchronized/#more" rel="contents">
+            <a class="btn" href="/2017/01/04/nineold-循环动画的bug/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -968,8 +994,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/11/python解析html页面内容/" itemprop="url">
-                  python解析html页面内容
+                <a class="post-title-link" href="/2016/12/21/aosp结构说明/" itemprop="url">
+                  aosp结构说明
                 </a>
               
             
@@ -982,8 +1008,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-11T11:53:56+08:00" content="2016-09-11">
-              2016-09-11
+            <time itemprop="dateCreated" datetime="2016-12-21T11:28:54+08:00" content="2016-12-21">
+              2016-12-21
             </time>
           </span>
 
@@ -993,8 +1019,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/11/python解析html页面内容/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/11/python解析html页面内容/" itemprop="commentsCount"></span>
+                <a href="/2016/12/21/aosp结构说明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/21/aosp结构说明/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1004,7 +1030,7 @@
 
           
           
-             <span id="/2016/09/11/python解析html页面内容/" class="leancloud_visitors" data-flag-title="python解析html页面内容">
+             <span id="/2016/12/21/aosp结构说明/" class="leancloud_visitors" data-flag-title="aosp结构说明">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1027,9 +1053,129 @@
 
       
         
-          <h2 id="下面的代码是使用Python解析HTML里的内容"><a href="#下面的代码是使用Python解析HTML里的内容" class="headerlink" title="下面的代码是使用Python解析HTML里的内容"></a>下面的代码是使用Python解析HTML里的内容</h2>
+          
+            <p>基于6.0.2项目</p>
+<ul>
+<li>./art/runtime/<ul>
+<li>运行时，Runtime.java的jni实现</li>
+<li>./art/runtime/native/java_lang_Runtime.cc</li>
+<li><a href="http://wps2015.org/drops/drops/Android%20Linker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html" target="_blank" rel="external">android linker机制：so的加载和相关库的链接</a></li>
+<li>vm实现</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/" itemprop="url">
+                  bug_PullToRefreshBase.onRestoreInstanceState
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-14T19:50:09+08:00" content="2016-12-14">
+              2016-12-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/" class="leancloud_visitors" data-flag-title="bug_PullToRefreshBase.onRestoreInstanceState">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>错误堆栈如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Caused by: java.lang.IllegalArgumentException: Wrong state class, expecting View State but received class android.support.v7.widget.RecyclerView$SavedState instead. This usually happens when two views of different type have the same id in the same hierarchy. This view's id is id/test_recycler_view. Make sure other views do not use the same id.</div><div class="line">	at android.view.View.onRestoreInstanceState(View.java:13978)</div><div class="line">	at com.test.pullrefreshview.PullToRefreshBase.onRestoreInstanceState(PullToRefreshBase.java:880)</div><div class="line">	at android.view.View.dispatchRestoreInstanceState(View.java:13954)</div><div class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3025)</div><div class="line">	at android.view.ViewGroup.dispatchRestoreInstanceState(ViewGroup.java:3031)</div><div class="line">	at android.view.View.restoreHierarchyState(View.java:13932)</div><div class="line">	at android.support.v4.app.Fragment.restoreViewState(Fragment.java:465)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1094)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1252)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.moveToState(FragmentManager.java:1234)</div><div class="line">	at android.support.v4.app.FragmentManagerImpl.dispatchActivityCreated(FragmentManager.java:2046)</div><div class="line">	at android.support.v4.app.FragmentController.dispatchActivityCreated(FragmentController.java:174)</div><div class="line">	at android.support.v4.app.FragmentActivity.onStart(FragmentActivity.java:597)</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/11/python解析html页面内容/#more" rel="contents">
+            <a class="btn" href="/2016/12/14/bug-PullToRefreshBase-onRestoreInstanceState/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1080,8 +1226,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/08/charles-chinese-error/" itemprop="url">
-                  解决Charles中文乱码
+                <a class="post-title-link" href="/2016/12/11/ClassLoader/" itemprop="url">
+                  ClassLoader
                 </a>
               
             
@@ -1094,8 +1240,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-08T15:38:00+08:00" content="2016-09-08">
-              2016-09-08
+            <time itemprop="dateCreated" datetime="2016-12-11T18:35:14+08:00" content="2016-12-11">
+              2016-12-11
             </time>
           </span>
 
@@ -1105,8 +1251,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/08/charles-chinese-error/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/charles-chinese-error/" itemprop="commentsCount"></span>
+                <a href="/2016/12/11/ClassLoader/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/11/ClassLoader/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1116,7 +1262,7 @@
 
           
           
-             <span id="/2016/09/08/charles-chinese-error/" class="leancloud_visitors" data-flag-title="解决Charles中文乱码">
+             <span id="/2016/12/11/ClassLoader/" class="leancloud_visitors" data-flag-title="ClassLoader">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1140,8 +1286,23 @@
       
         
           
-            <p><a href="http://www.paincker.com/charles-charset-incorrect" target="_blank" rel="external">Charles设置MapLocal乱码的解决</a></p>
-<p>主要通过Tools-rewrite给返回的response的header添加Content-Type=application/json;charset=UTF-8</p>
+            <ul>
+<li>MyApplication.class.getClassLoader<ul>
+<li>dalvik.system.PathClassLoader[/data/app/com.test.apk]</li>
+</ul>
+</li>
+<li>Application.class.getClassLoader<ul>
+<li>java.lang.BootClassLoader@410fbd18</li>
+</ul>
+</li>
+<li>Context.getClassLoader和Class.getClassLoader的区别<ul>
+<li>Context.getClassLoader 获取加载apk的ClassLoader</li>
+<li>Class.getClassLoader 获取加载当前Class的ClassLoader</li>
+</ul>
+</li>
+</ul>
+<img src="/2016/12/11/ClassLoader/a.png" alt="a.png" title="">
+<p><img src="ClassLoader/a.png" alt=""></p>
 
           
         
@@ -1191,8 +1352,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/07/how-to-build-sdk/" itemprop="url">
-                  编译Android sdk,添加隐藏代码
+                <a class="post-title-link" href="/2016/12/01/systrace使用/" itemprop="url">
+                  systrace使用
                 </a>
               
             
@@ -1205,8 +1366,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-07T22:19:23+08:00" content="2016-09-07">
-              2016-09-07
+            <time itemprop="dateCreated" datetime="2016-12-01T16:39:56+08:00" content="2016-12-01">
+              2016-12-01
             </time>
           </span>
 
@@ -1216,8 +1377,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/07/how-to-build-sdk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/how-to-build-sdk/" itemprop="commentsCount"></span>
+                <a href="/2016/12/01/systrace使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/systrace使用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1227,132 +1388,7 @@
 
           
           
-             <span id="/2016/09/07/how-to-build-sdk/" class="leancloud_visitors" data-flag-title="编译Android sdk,添加隐藏代码">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><ul>
-<li>看View等源码不飘红了，看着更方便</li>
-<li>单步跟踪更方便</li>
-<li>不用经常打开庞大的aosp项目，看个别方法的实现。提高开发效率</li>
-<li>其它app运行在aosp的机器上时，可以通过debug查看调用了那些系统api</li>
-</ul>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
-<li>Android aosp 6.0(23)</li>
-<li>java 1.7</li>
-<li>mac</li>
-</ul>
-<h3 id="编译sdk步骤"><a href="#编译sdk步骤" class="headerlink" title="编译sdk步骤"></a>编译sdk步骤</h3><h4 id="初始化编译环境"><a href="#初始化编译环境" class="headerlink" title="初始化编译环境"></a>初始化编译环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source build/envsetup.sh</div></pre></td></tr></table></figure>
-<h4 id="设定编译目标"><a href="#设定编译目标" class="headerlink" title="设定编译目标"></a>设定编译目标</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lunch sdk-eng</div></pre></td></tr></table></figure>
-<h4 id="通过以下命令编译SDK"><a href="#通过以下命令编译SDK" class="headerlink" title="通过以下命令编译SDK"></a>通过以下命令编译SDK</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">make sdk</div><div class="line"></div><div class="line">成功输出</div><div class="line">\e[0;32m#### make completed successfully (01:34:53 (hh:mm:ss)) ####\e[00m</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/07/how-to-build-sdk/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/12/android23-use-apache-http/" itemprop="url">
-                  android23使用apache-http
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-12T10:31:17+08:00" content="2016-08-12">
-              2016-08-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/12/android23-use-apache-http/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/android23-use-apache-http/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/12/android23-use-apache-http/" class="leancloud_visitors" data-flag-title="android23使用apache-http">
+             <span id="/2016/12/01/systrace使用/" class="leancloud_visitors" data-flag-title="systrace使用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1376,10 +1412,75 @@
       
         
           
-            <p>添加</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    useLibrary <span class="string">'org.apache.http.legacy'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>gradle-wrapper.properties 里的版本</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-2.10-all.zip</span></div></pre></td></tr></table></figure>
+            <p>参考文章：</p>
+<ul>
+<li><a href="http://gityuan.com/2016/01/17/systrace/" target="_blank" rel="external">性能工具Systrace</a></li>
+<li><a href="http://androidperformance.com/2015/01/30/android-performance-tools-systrace-1.html" target="_blank" rel="external">Android性能优化之Systrace工具介绍(一)</a></li>
+</ul>
+<p>使用要求：</p>
+<ul>
+<li>eng或userdebug版才能用</li>
+</ul>
+<p>使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">pwd</span></div><div class="line">/Users/geelong/developer/android-sdk-macosx/platform-tools/systrace</div><div class="line"></div><div class="line"> python systrace.py --time=3 -o mynewtrace.html <span class="built_in">sched</span> gfx view wm</div><div class="line"> </div><div class="line"> python systrace.py --time=3 gfx input view <span class="built_in">sched</span> freq wm am workq res dalvik sync  disk load hal rs  -o idle -o 1.html</div></pre></td></tr></table></figure>
+<p>systrace和traceview的区别</p>
+<ul>
+<li>systrace除了能看到自己进程的信息，还能看到别的jin进程的信息</li>
+<li>systrace能看到cpu正在执行的任务，可以分析是否cpu被抢占导致执行缓慢。traceview只能看到执行方法时间的长短，不能看到等待cpu这个过程</li>
+<li>systrace能看到GC</li>
+<li>systrace能看到哪一帧卡顿了</li>
+<li>traceview能看到自己app内的方法的执行时间</li>
+<li>systrace是宏观的，过程相关，能看出哪个过程（layout、measure、draw）耗时长,但是是业务无关的，看不出具体是那块业务的layout时间长。traceview是微观的，能看出哪个具体方法耗时长</li>
+<li>通过Systrace的数据，可以大体上的发现是否存在性能问题。但如果要知道具体情况，就需要用到另外一个工具。 </li>
+</ul>
+<p>6.TraceView</p>
+<h3 id="卡顿的原因"><a href="#卡顿的原因" class="headerlink" title="卡顿的原因"></a>卡顿的原因</h3><ul>
+<li>measure、layout、draw慢<ul>
+<li>Hierarchy Viewer</li>
+</ul>
+</li>
+<li>gc</li>
+<li>cpu抢占<ul>
+<li>降低不重要线程的优先级 android.os.Process#THREAD_PRIORITY_BACKGROUND </li>
+</ul>
+</li>
+</ul>
+<h3 id="优化重点"><a href="#优化重点" class="headerlink" title="优化重点"></a>优化重点</h3><ul>
+<li>执行次数少，但时间很长</li>
+<li>时间短，但执行次数很多</li>
+<li>火焰图才比较容易看出来</li>
+</ul>
+<h4 id="从这里看出，执行时间比较短，但是等待时间就比较长"><a href="#从这里看出，执行时间比较短，但是等待时间就比较长" class="headerlink" title="从这里看出，执行时间比较短，但是等待时间就比较长"></a>从这里看出，执行时间比较短，但是等待时间就比较长</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Title	performTraversals</div><div class="line">Category	android</div><div class="line">User Friendly Category	other</div><div class="line">Start	2,795.563 ms</div><div class="line">Wall Duration	 229.065 ms</div><div class="line">CPU Duration	97.303 ms</div><div class="line">Self Time	 1.374 ms</div><div class="line">CPU Self Time	 1.008 ms</div><div class="line">Description	</div><div class="line">A drawing traversal of the View hierarchy, comprised of all layout and drawing needed to produce the frame.</div></pre></td></tr></table></figure>
+<h2 id="TraceView使用"><a href="#TraceView使用" class="headerlink" title="TraceView使用"></a>TraceView使用</h2><ul>
+<li>几个方法显示cpu时间200多ms,优化完后，进行对比，效果并不明显<ul>
+<li>通过log的方式，发现多的只需要30-50ms</li>
+<li>再抓一次traceview，部分方法的cpu时间变为1ms</li>
+<li><a href="http://blog.csdn.net/oujunli/article/details/50575115" target="_blank" rel="external">对性能影响比较大：Android CPU FlameGraph</a></li>
+<li><a href="https://testerhome.com/topics/3505" target="_blank" rel="external">TraceView 自动化抓取方案实践</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="dmtracedump使用"><a href="#dmtracedump使用" class="headerlink" title="dmtracedump使用"></a>dmtracedump使用</h2><ul>
+<li><a href="https://developer.android.com/studio/profile/traceview.html#dmtracedump" target="_blank" rel="external">官网</a></li>
+<li><a href="http://tangzm.com/blog/?p=16" target="_blank" rel="external">demo</a></li>
+</ul>
+<hr>
+<p>遇到的问题</p>
+<p>Android systrace “Could not find an importer for the provided eventData” error resolution</p>
+<ol>
+<li><p>open chrome browser and go to “chrome://tracing”</p>
+</li>
+<li><p>in the tracing page, click load and select the systrace generated html file</p>
+</li>
+</ol>
+<p>This works for me.</p>
+<h2 id="systrace-使用"><a href="#systrace-使用" class="headerlink" title="systrace 使用"></a>systrace 使用</h2><ul>
+<li>Trace.beginSection、Trace.endSection()配套使用</li>
+<li>systrace.py 的时候需要指定包名（–app=包名）</li>
+<li>结果上把图缩到最小，然后搜索对应tag,再ctrl+f 对焦到该区域</li>
+<li>先执行收集的命令，过一会再打开app,否则启动那块数据收集不上</li>
+</ul>
+
           
         
       
@@ -1411,7 +1512,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1452,7 +1553,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1462,7 +1563,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1508,7 +1609,7 @@ PV: 10000<span id="busuanzi_value_site_pv"></span>
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
